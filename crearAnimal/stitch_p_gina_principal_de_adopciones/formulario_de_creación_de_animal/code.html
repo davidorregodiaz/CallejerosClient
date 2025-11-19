@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+
+<html className="light" lang="es">
+
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <title>Crear Perfil de Adopción - AdoptaAmor</title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link href="https://fonts.googleapis.com" rel="preconnect" />
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap"
+    rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+  <script>
+    tailwind.config = {
+      darkMode: "className",
+      theme: {
+        extend: {
+          colors: {
+            "primary": "#3E8A86", // Verde azulado
+            "primary-light": "#e0f2f1", // Verde azulado muy claro para fondos sutiles
+            "accent": "#F9A826", // Naranja cálido
+            "background-light": "#F8F9FA",
+            "background-dark": "#1a1a1a",
+            "text-light": "#343A40",
+            "text-dark": "#e5e7eb",
+            "border-light": "#dee2e6",
+            "border-dark": "#4b5563"
+          },
+          fontFamily: {
+            "display": ["Plus Jakarta Sans", "sans-serif"]
+          },
+          borderRadius: {
+            "DEFAULT": "0.5rem",
+            "lg": "1rem",
+            "xl": "1.5rem",
+            "full": "9999px"
+          },
+        },
+      },
+    }
+  </script>
+  <style>
+    .material-symbols-outlined {
+      font-variation-settings:
+        'FILL' 0,
+        'wght' 400,
+        'GRAD' 0,
+        'opsz' 24
+    }
+
+    /* Estilo para los radio buttons personalizados */
+    .radio-label {
+      transition: all 0.2s ease-in-out;
+    }
+
+    .radio-input:checked+.radio-label {
+      border-color: #3E8A86;
+      /* primary color */
+      background-color: #e0f2f1;
+      /* primary-light color */
+      color: #3E8A86;
+      font-weight: 600;
+    }
+
+    .tag-label {
+      transition: all 0.2s ease-in-out;
+    }
+
+    .tag-input:checked+.tag-label {
+      background-color: #3E8A86;
+      /* primary color */
+      color: white;
+    }
+  </style>
+</head>
+
+<body className="bg-background-light dark:bg-background-dark font-display text-text-light dark:text-text-dark">
+  <div className="relative flex min-h-screen w-full flex-col">
+    <header
+      className="sticky top-0 z-10 flex items-center justify-between whitespace-nowrap border-b border-solid border-border-light dark:border-border-dark bg-background-light/80 dark:bg-background-dark/80 px-4 py-3 backdrop-blur-sm sm:px-6 lg:px-8">
+      <div className="flex items-center gap-4">
+        <div className="size-6 text-primary">
+          <svg fill="none" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+            <path
+              d="M36.7273 44C33.9891 44 31.6043 39.8386 30.3636 33.69C29.123 39.8386 26.7382 44 24 44C21.2618 44 18.877 39.8386 17.6364 33.69C16.3957 39.8386 14.0109 44 11.2727 44C7.25611 44 4 35.0457 4 24C4 12.9543 7.25611 4 11.2727 4C14.0109 4 16.3957 8.16144 17.6364 14.31C18.877 8.16144 21.2618 4 24 4C26.7382 4 29.123 8.16144 30.3636 14.31C31.6043 8.16144 33.9891 4 36.7273 4C40.7439 4 44 12.9543 44 24C44 35.0457 40.7439 44 36.7273 44Z"
+              fill="currentColor"></path>
+          </svg>
+        </div>
+        <h2 className="text-lg font-bold tracking-[-0.015em] text-text-light dark:text-text-dark">AdoptaAmor</h2>
+      </div>
+      <div className="flex flex-1 items-center justify-end gap-4">
+        <nav className="hidden items-center gap-6 md:flex">
+          <a className="text-sm font-medium hover:text-primary dark:hover:text-primary" href="#">Buscar Animales</a>
+          <a className="text-sm font-medium hover:text-primary dark:hover:text-primary" href="#">Historias de Éxito</a>
+          <a className="text-sm font-medium hover:text-primary dark:hover:text-primary" href="#">Donar</a>
+          <a className="text-sm font-medium hover:text-primary dark:hover:text-primary" href="#">Sobre Nosotros</a>
+        </nav>
+        <div className="hidden items-center gap-2 sm:flex">
+          <button
+            className="flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-primary text-white text-sm font-bold shadow-sm transition-opacity hover:opacity-90">
+            <span className="truncate">Iniciar Sesión</span>
+          </button>
+          <div className="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10" data-alt="User avatar image"
+            style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCmemdwmmXhFTzil8RA5pLRX6h3z3c9FPw2WmpXo5Nho66T77zXGsSbQUYaabQVr6-Hv73cDZCKlZHNVPjVPWQbg69ivT3FA-0aRa82GjIp0FwyROZ8mTqDFmBBpTol5E6-JP1-Whovp_-9Zs_LKKHypKyXkRZkLLsVitf6h_3HM1dlO3KioeVUhlGuaaFPHBMQCWCj9u6glMsDTQE7l8pDMELt1JG422VRD6AedBN6rSTykNLUEO5rR5x0XvnYkKB18gx0GOHTGGA");'>
+          </div>
+        </div>
+        <button className="p-2 md:hidden">
+          <span className="material-symbols-outlined" data-icon="menu">menu</span>
+        </button>
+      </div>
+    </header>
+    <main className="flex flex-1 justify-center p-4 sm:p-6 lg:p-8">
+      <div className="w-full max-w-4xl space-y-8">
+        <div className="flex flex-wrap items-baseline justify-between gap-4">
+          <p className="text-4xl font-black tracking-[-0.033em] text-text-light dark:text-text-dark">Crear un nuevo perfil
+            para adopción</p>
+        </div>
+        <div
+          className="rounded-xl border border-border-light dark:border-border-dark bg-white dark:bg-background-dark/50 p-6 shadow-sm">
+          <h2 className="text-[22px] font-bold tracking-[-0.015em] text-text-light dark:text-text-dark pb-6">Información
+            Básica</h2>
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+            <label className="flex flex-col">
+              <p className="text-base font-medium pb-2">Nombre del animal</p>
+              <input
+                className="form-input flex w-full resize-none overflow-hidden rounded-lg text-text-light dark:text-text-dark focus:outline-0 focus:ring-2 focus:ring-primary/50 border border-border-light dark:border-border-dark bg-background-light dark:bg-background-dark h-12 p-3 text-base font-normal placeholder:text-gray-400"
+                placeholder="Ej: Fido" value="" />
+            </label>
+            <label className="flex flex-col">
+              <p className="text-base font-medium pb-2">Edad</p>
+              <input
+                className="form-input flex w-full resize-none overflow-hidden rounded-lg text-text-light dark:text-text-dark focus:outline-0 focus:ring-2 focus:ring-primary/50 border border-border-light dark:border-border-dark bg-background-light dark:bg-background-dark h-12 p-3 text-base font-normal placeholder:text-gray-400"
+                placeholder="Ej: 2 años" value="" />
+            </label>
+            <label className="flex flex-col">
+              <p className="text-base font-medium pb-2">Especie</p>
+              <select
+                className="form-select flex w-full resize-none overflow-hidden rounded-lg text-text-light dark:text-text-dark focus:outline-0 focus:ring-2 focus:ring-primary/50 border border-border-light dark:border-border-dark bg-background-light dark:bg-background-dark h-12 p-3 text-base font-normal">
+                <option>Seleccionar especie</option>
+                <option>Perro</option>
+                <option>Gato</option>
+                <option>Otro</option>
+              </select>
+            </label>
+            <label className="flex flex-col">
+              <p className="text-base font-medium pb-2">Raza</p>
+              <select
+                className="form-select flex w-full resize-none overflow-hidden rounded-lg text-text-light dark:text-text-dark focus:outline-0 focus:ring-2 focus:ring-primary/50 border border-border-light dark:border-border-dark bg-background-light dark:bg-background-dark h-12 p-3 text-base font-normal">
+                <option>Seleccionar raza</option>
+                <option>Mestizo</option>
+                <option>Labrador</option>
+                <option>Pastor Alemán</option>
+                <option>Golden Retriever</option>
+              </select>
+            </label>
+          </div>
+        </div>
+        <div
+          className="rounded-xl border border-border-light dark:border-border-dark bg-white dark:bg-background-dark/50 p-6 shadow-sm">
+          <h2 className="text-[22px] font-bold tracking-[-0.015em] text-text-light dark:text-text-dark pb-6">Características
+            y Comportamiento</h2>
+          <div className="space-y-6">
+            <div>
+              <p className="text-base font-medium pb-3">Tamaño</p>
+              <div className="grid grid-cols-3 gap-4">
+                <div className="relative">
+                  <input checked="" className="radio-input absolute opacity-0" id="size-small" name="size" type="radio" />
+                  <label
+                    className="radio-label flex cursor-pointer items-center justify-center rounded-lg border border-border-light dark:border-border-dark p-3 text-center text-sm"
+                    for="size-small">Pequeño</label>
+                </div>
+                <div className="relative">
+                  <input className="radio-input absolute opacity-0" id="size-medium" name="size" type="radio" />
+                  <label
+                    className="radio-label flex cursor-pointer items-center justify-center rounded-lg border border-border-light dark:border-border-dark p-3 text-center text-sm"
+                    for="size-medium">Mediano</label>
+                </div>
+                <div className="relative">
+                  <input className="radio-input absolute opacity-0" id="size-large" name="size" type="radio" />
+                  <label
+                    className="radio-label flex cursor-pointer items-center justify-center rounded-lg border border-border-light dark:border-border-dark p-3 text-center text-sm"
+                    for="size-large">Grande</label>
+                </div>
+              </div>
+            </div>
+            <div>
+              <p className="text-base font-medium pb-3">Personalidad (selecciona varias)</p>
+              <div className="flex flex-wrap gap-2">
+                <div className="relative">
+                  <input className="tag-input absolute opacity-0" id="tag-playful" type="checkbox" />
+                  <label
+                    className="tag-label cursor-pointer rounded-full border border-border-light dark:border-border-dark bg-background-light dark:bg-background-dark px-3 py-1.5 text-sm"
+                    for="tag-playful">Juguetón</label>
+                </div>
+                <div className="relative">
+                  <input className="tag-input absolute opacity-0" id="tag-calm" type="checkbox" />
+                  <label
+                    className="tag-label cursor-pointer rounded-full border border-border-light dark:border-border-dark bg-background-light dark:bg-background-dark px-3 py-1.5 text-sm"
+                    for="tag-calm">Tranquilo</label>
+                </div>
+                <div className="relative">
+                  <input className="tag-input absolute opacity-0" id="tag-shy" type="checkbox" />
+                  <label
+                    className="tag-label cursor-pointer rounded-full border border-border-light dark:border-border-dark bg-background-light dark:bg-background-dark px-3 py-1.5 text-sm"
+                    for="tag-shy">Tímido</label>
+                </div>
+                <div className="relative">
+                  <input className="tag-input absolute opacity-0" id="tag-energetic" type="checkbox" />
+                  <label
+                    className="tag-label cursor-pointer rounded-full border border-border-light dark:border-border-dark bg-background-light dark:bg-background-dark px-3 py-1.5 text-sm"
+                    for="tag-energetic">Energético</label>
+                </div>
+                <div className="relative">
+                  <input className="tag-input absolute opacity-0" id="tag-affectionate" type="checkbox" />
+                  <label
+                    className="tag-label cursor-pointer rounded-full border border-border-light dark:border-border-dark bg-background-light dark:bg-background-dark px-3 py-1.5 text-sm"
+                    for="tag-affectionate">Cariñoso</label>
+                </div>
+              </div>
+            </div>
+            <div>
+              <p className="text-base font-medium pb-3">Compatibilidad</p>
+              <div className="flex flex-wrap gap-2">
+                <div className="relative">
+                  <input className="tag-input absolute opacity-0" id="comp-kids" type="checkbox" />
+                  <label
+                    className="tag-label cursor-pointer rounded-full border border-border-light dark:border-border-dark bg-background-light dark:bg-background-dark px-3 py-1.5 text-sm"
+                    for="comp-kids">Bueno con niños</label>
+                </div>
+                <div className="relative">
+                  <input className="tag-input absolute opacity-0" id="comp-dogs" type="checkbox" />
+                  <label
+                    className="tag-label cursor-pointer rounded-full border border-border-light dark:border-border-dark bg-background-light dark:bg-background-dark px-3 py-1.5 text-sm"
+                    for="comp-dogs">Bueno con otros perros</label>
+                </div>
+                <div className="relative">
+                  <input className="tag-input absolute opacity-0" id="comp-cats" type="checkbox" />
+                  <label
+                    className="tag-label cursor-pointer rounded-full border border-border-light dark:border-border-dark bg-background-light dark:bg-background-dark px-3 py-1.5 text-sm"
+                    for="comp-cats">Bueno con gatos</label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          className="rounded-xl border border-border-light dark:border-border-dark bg-white dark:bg-background-dark/50 p-6 shadow-sm">
+          <h2 className="text-[22px] font-bold tracking-[-0.015em] text-text-light dark:text-text-dark pb-6">Requisitos e
+            Historial</h2>
+          <div className="space-y-6">
+            <label className="flex flex-col">
+              <p className="text-base font-medium pb-2">Requisitos de adopción</p>
+              <textarea
+                className="form-textarea w-full resize-y rounded-lg text-text-light dark:text-text-dark focus:outline-0 focus:ring-2 focus:ring-primary/50 border border-border-light dark:border-border-dark bg-background-light dark:bg-background-dark p-3 text-base font-normal placeholder:text-gray-400"
+                placeholder="Describe el hogar ideal, nivel de experiencia del adoptante, etc." rows="4"></textarea>
+            </label>
+            <label className="flex flex-col">
+              <p className="text-base font-medium pb-2">Historial médico</p>
+              <textarea
+                className="form-textarea w-full resize-y rounded-lg text-text-light dark:text-text-dark focus:outline-0 focus:ring-2 focus:ring-primary/50 border border-border-light dark:border-border-dark bg-background-light dark:bg-background-dark p-3 text-base font-normal placeholder:text-gray-400"
+                placeholder="Información sobre vacunas, esterilización, condiciones médicas conocidas..."
+                rows="4"></textarea>
+            </label>
+          </div>
+        </div>
+        <div
+          className="rounded-xl border border-border-light dark:border-border-dark bg-white dark:bg-background-dark/50 p-6 shadow-sm">
+          <h2 className="text-[22px] font-bold tracking-[-0.015em] text-text-light dark:text-text-dark pb-6">Galería de
+            Fotos</h2>
+          <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
+            <div>
+              <p className="text-base font-medium pb-3">Foto principal</p>
+              <div
+                className="flex h-64 w-full cursor-pointer items-center justify-center rounded-xl border-2 border-dashed border-border-light dark:border-border-dark bg-background-light dark:bg-background-dark transition-colors hover:border-primary/50 hover:bg-primary-light/50 dark:hover:bg-primary/10">
+                <div className="text-center">
+                  <span className="material-symbols-outlined text-4xl text-gray-400"
+                    data-icon="upload_file">upload_file</span>
+                  <p className="mt-2 text-sm text-gray-500 dark:text-gray-400">Arrastra una foto o haz clic para subir</p>
+                  <p className="text-xs text-gray-400 dark:text-gray-500">PNG, JPG, WEBP</p>
+                </div>
+              </div>
+            </div>
+            <div>
+              <p className="text-base font-medium pb-3">Imágenes adicionales</p>
+              <div className="grid grid-cols-3 gap-3">
+                <div
+                  className="flex aspect-square w-full cursor-pointer items-center justify-center rounded-lg border-2 border-dashed border-border-light dark:border-border-dark bg-background-light dark:bg-background-dark transition-colors hover:border-primary/50 hover:bg-primary-light/50 dark:hover:bg-primary/10">
+                  <span className="material-symbols-outlined text-3xl text-gray-400"
+                    data-icon="add_photo_alternate">add_photo_alternate</span>
+                </div>
+                <div className="aspect-square w-full rounded-lg bg-center bg-no-repeat bg-cover"
+                  data-alt="additional photo of a pet"
+                  style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDQeJvmU6dfC0FuhjYZ_fuM5i34FMdzMtXnszejf_m-417COpVELLnh6ZGUbq5wsIhhhJQRonzYWLoNLAfJ2BaHKxI9TkqJCzpXjfTDDvHLaIc1DXhQ3LZMINSDLrxxYZwXDZkAXl3NWMmdAJwZEjAz6JFbaNZVtngKQe1LIerjnU8CisQsBvEacsEJtsGSBspt8OIL8UGD70YfxnbI0OaqOjASTMAHhoMfpcOKULVzO2l9rzmAS-GBGmrnjzsurlZnSzSIeCzIBGM");'>
+                </div>
+                <div className="aspect-square w-full rounded-lg bg-center bg-no-repeat bg-cover"
+                  data-alt="additional photo of a pet"
+                  style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuACMuJNBq37kyHj4tDzLrN68MTy7XqYy8R5OwBN9eZsDb8XfSFJK2nw1eAoEY6BYl1Sj4teSxSK7lqb4qQXN_vMrBkcbHZyQnW85R-YVIbIlTPlZ6YmVM3cTvKCQDL8QsxiovOppa6O2C0_SuGK-HfLeuSfZ4ooSUIeVk9JIw6m_QHl3vZLt0nq0kGvHQHMXZfgs43k0Q9WAHwlGqHxjrJYKoGcMl3DK_gLrfVlPqREeQuTAth5S-_XgDTDMirh7VbMqkdZTNHvrTw");'>
+                </div>
+                <div className="aspect-square w-full rounded-lg bg-center bg-no-repeat bg-cover"
+                  data-alt="additional photo of a pet"
+                  style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuA6Z-g6IemiGYwI5fF_mW90V7i49XaMzeIWfW9DT9lcUtz5Tmb0L1KNxYqxX7JhbVVPkzIfvtF8fZbjVorSuIPNXyspVu5wKw1fM58BcmlGt9ZQUmsp_Xux6N2qgYVfCa2GMn6r3mzULDpWqgQ1ZwnB6bevC4nhDocOVPZHVJ5jqn8R3UM0wiXojtJ4kvYC4U0vkJaPnFTAFjWNTmKNHLL4Dyeawurut9SBFs6KjktmDgQmeBltutcn9X10et7bTvClQi8j_GVASCU");'>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="flex flex-col-reverse items-center justify-end gap-4 pt-4 sm:flex-row">
+          <button
+            className="flex w-full min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 px-6 bg-gray-200 dark:bg-gray-700 text-text-light dark:text-text-dark text-base font-bold shadow-sm transition-opacity hover:opacity-90 sm:w-auto">
+            <span className="truncate">Cancelar</span>
+          </button>
+          <button
+            className="flex w-full min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 px-6 bg-accent text-white text-base font-bold shadow-sm transition-opacity hover:opacity-90 sm:w-auto">
+            <span className="truncate">Guardar como Borrador</span>
+          </button>
+          <button
+            className="flex w-full min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 px-6 bg-primary text-white text-base font-bold shadow-sm transition-opacity hover:opacity-90 sm:w-auto">
+            <span className="truncate">Publicar para Adopción</span>
+          </button>
+        </div>
+      </div>
+    </main>
+  </div>
+</body>
+
+</html>
