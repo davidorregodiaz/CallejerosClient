@@ -8,13 +8,15 @@ import { RegisterSteps } from './features/auth/pages/RegisterSteps.jsx'
 import { CreateAdoption } from './features/animals/pages/CreateAdoption.jsx'
 import { Login } from './features/auth/pages/Login'
 import { AuthProvider } from './features/auth/context/AuthProvider'
+import { Profile } from './pages/Profile.jsx'
 
 function App() {
   return (
     <Routes>
       {/* Rutas fuera de Layout */}
-      {/* <Route path="/register/*" element={<RegisterSteps />} /> */}
+      <Route path="/register/*" element={<RegisterSteps />} />
       <Route path="/login" element={<Login />} />
+      <Route path='/profile' element={<Profile />} />
       
       {/* Rutas con Layout */}
       <Route element={<Layout />}>

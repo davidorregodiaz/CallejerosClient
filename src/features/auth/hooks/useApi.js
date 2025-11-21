@@ -16,7 +16,7 @@ export const useApi = () => {
 
     const res = await fetch(endpoint, finalOptions);
 
-    if (res.status === 401 || (res.status === 403 && retry)) {
+    if (res.status === 401 && retry) {
       const newToken = await refreshToken();
       if (!newToken) return res; 
 

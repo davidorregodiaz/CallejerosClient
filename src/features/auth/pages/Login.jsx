@@ -1,8 +1,11 @@
 import { useState } from "react";
 import { useAuth } from "../hooks/useAuth";
+import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom"
 
 export const Login = () => {
   const { login } = useAuth();
+  const navigate = useNavigate();
   const [htmlForm, sethtmlForm] = useState({
     email: "",
     password: "",
@@ -15,14 +18,19 @@ export const Login = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     console.log("htmlFormulario enviado:", htmlForm);
 
-    login({
+    const accessToken = await login({
       email: htmlForm.email,
       password: htmlForm.password,
     });
+
+    console.log(accessToken);
+    
+    if(accessToken) navigate("/");
+
   };
 
   return (
@@ -153,12 +161,12 @@ export const Login = () => {
                 </div>
                 <p className="mt-8 text-center text-sm">
                   ¿No tienes una cuenta?
-                  <a
+                  <Link
                     className="font-semibold text-primary hover:underline"
-                    href="#"
+                    to="/register"
                   >
                     Crear una cuenta
-                  </a>
+                  </Link>
                 </p>
               </div>
             </div>

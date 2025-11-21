@@ -1,18 +1,20 @@
 // RegisterSteps.jsx
-import React, { useReducer, useEffect } from "react";
-import { Outlet, useNavigate } from "react-router-dom";
+import { useReducer, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { RegisterContext} from "../context/RegisterContext";
+import { useAuth } from "../../auth/hooks/useAuth";
+
 
 const STORAGE_KEY = "register_data_v1";
 
 // --- Context para que Step1/2/3 usen los mismos datos ---
-
 
 const initialState = {
   email: "",
   password: "",
   username: "",
   avatarFile: null, // File
-  role: "" // "adoptar" | "dar"
+  role: "", // "adoptar" | "dar"
 };
 
 // Reducer simple para actualizar campos
@@ -33,6 +35,7 @@ function reducer(state, action) {
 
 export function RegisterProvider({ children }) {
   const [state, dispatch] = useReducer(reducer, initialState);
+  const { register } = useAuth();
   const navigate = useNavigate();
 
   // Cargar desde sessionStorage al montar
@@ -56,7 +59,7 @@ export function RegisterProvider({ children }) {
       email: state.email,
       password: state.password,
       username: state.username,
-      role: state.role
+      role: state.role,
       // avatarFile no se guarda (puedes guardar preview base64 si quieres)
     };
     sessionStorage.setItem(STORAGE_KEY, JSON.stringify(toSave));
@@ -65,22 +68,18 @@ export function RegisterProvider({ children }) {
   const setField = (field, value) =>
     dispatch({ type: "SET_FIELD", field, value });
 
-  const setAvatar = (file) =>
-    dispatch({ type: "SET_AVATAR", file });
+  const setAvatar = (file) => dispatch({ type: "SET_AVATAR", file });
 
   const reset = () => {
     dispatch({ type: "RESET" });
     sessionStorage.removeItem(STORAGE_KEY);
   };
 
-  // Función para hacer submit final (en el paso 3)
   const submitRegistration = async () => {
-    // Validaciones rápidas
     if (!state.email || !state.password || !state.username || !state.role) {
       throw new Error("Faltan campos obligatorios");
     }
 
-    // Crear FormData (para subir avatar)
     const form = new FormData();
     form.append("email", state.email);
     form.append("password", state.password);
@@ -90,36 +89,21 @@ export function RegisterProvider({ children }) {
       form.append("avatar", state.avatarFile);
     }
 
-    // POST al backend
-    const res = await fetch(`${import.meta.env.VITE_API_URL}/auth/register`, {
-      method: "POST",
-      body: form
-      // NO pongas Content-Type: multipart/form-data (fetch lo asigna)
-    });
-
-    if (!res.ok) {
-      const text = await res.text();
-      throw new Error(text || `Error ${res.status}`);
-    }
-
-    const data = await res.json();
-    // Opcional: limpiar y redirigir
+    await register(form);
     reset();
-    // navegar a login o dashboard según tu flujo
-    navigate("/login");
-    return data;
+    navigate("/");
   };
 
   return (
-    <RegisterContext.Provider value={{
-      data: state,
-      setField,
-      setAvatar,
-      submitRegistration
-    }}>
+    <RegisterContext.Provider
+      value={{
+        data: state,
+        setField,
+        setAvatar,
+        submitRegistration,
+      }}
+    >
       {children}
     </RegisterContext.Provider>
   );
 }
-
-

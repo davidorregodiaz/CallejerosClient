@@ -1,9 +1,7 @@
-import { useApi } from "../../auth/hooks/useApi";
 import { useEffect, useState } from "react";
 import { API_URL } from "../../../shared/commons/constants";
 
 export const useFetchAnimals = () => {
-  const api = useApi();
   const [animals, setAnimals] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -12,7 +10,7 @@ export const useFetchAnimals = () => {
     setLoading(true);
     setError(null);
     try {
-      const res = await api(`${API_URL}/animals`, { method: "GET" });
+      const res = await fetch(`${API_URL}/animals`, { method: "GET" });
       if (!res.ok) {
         throw new Error("Error al obtener los animales");
       }

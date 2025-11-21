@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { useAuth } from "../../features/auth/hooks/useAuth";
+import { UserLoggedIn } from "../../components/UserLoggedIn";
 
 export function Navbar() {
   const { token } = useAuth();
@@ -57,9 +58,7 @@ export function Navbar() {
         </div>
 
         {token ? (
-          <Link className="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-10 px-4 bg-primary text-white text-sm font-bold leading-normal tracking-[0.015em]">
-            <span className="truncate">Donar</span>
-          </Link>
+          <UserLoggedIn />
         ) : (
           <Link
             to={"/login"}

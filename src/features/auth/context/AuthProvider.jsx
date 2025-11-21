@@ -1,13 +1,14 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { AuthContext } from "./AuthContext";
-import { useApi } from "../hooks/useApi";
+// import { useApi } from "../hooks/useApi";
 import { API_URL } from "../../../shared/commons/constants";
 
 export const AuthProvider = ({ children }) => {
   const [token, setToken] = useState();
-  const api = useApi();
+  const [user, setUser] = useState(null);
+  // const api = useApi();
 
-  const login = (userData) => {
+  const login = async (userData) => {
     const options = {
       method: "POST",
       credentials: "include",
@@ -20,19 +21,37 @@ export const AuthProvider = ({ children }) => {
       }),
     };
 
-    fetch(`${API_URL}/auth/login`, options)
-      .then((res) => res.json())
-      .then((data) => {
-        const { token: accessToken } = data;
-        setToken(accessToken);
-        console.log("Login exitoso ",accessToken);
-      })
-      .catch((error) => console.warn("Error en login:", error));
+    try {
+      const res = await fetch(`${API_URL}/auth/login`, options);
+      if (!res.ok) throw new Error("Error en login");
+      const data = await res.json();
+      const { token: accessToken, user } = data;
+      setToken(accessToken);
+      console.log(user);
+      setUser(user);
+      console.log("Login exitoso ", accessToken);
+      return accessToken;
+    } catch (err) {
+      console.error("Error en login:", err);
+      throw err;
+    }
   };
+
+  useEffect(() => {
+    const init = async () => {
+      try {
+        await refreshToken();
+      } catch (error) {
+        console.log("No se pudo refrescar token al iniciar ",error);
+      }
+    };
+
+    init();
+  }, []);
 
   const logout = () => {
     setToken(null);
-    api(`${API_URL}/auth/logout`, { method: "POST" });
+    // api(`${API_URL}/auth/logout`, { method: "POST" });
   };
 
   const refreshToken = async () => {
@@ -43,14 +62,31 @@ export const AuthProvider = ({ children }) => {
 
     if (!res.ok) setToken(null);
 
-    const { token: newToken } = await res.json();
+    const { token: newToken, user } = await res.json();
     console.log("Token refreshed:", newToken);
     setToken(newToken);
+    setUser(user); 
     return newToken;
   };
 
+  const register = async (userForm) => {
+    const res = await fetch(`${API_URL}/auth/register`, {
+      method: "POST",
+      body: userForm,
+      credentials: "include",
+    });
+
+    if (!res.ok) throw new Error("Error al registrar usuario");
+
+    const { token: newToken, user } = await res.json();
+    setToken(newToken);
+    setUser(user);
+  };
+
   return (
-    <AuthContext.Provider value={{ token, login, logout, refreshToken }}>
+    <AuthContext.Provider
+      value={{ token, login, logout, refreshToken, register, user }}
+    >
       {children}
     </AuthContext.Provider>
   );

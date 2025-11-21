@@ -31,7 +31,7 @@ export function Step1() {
               Crea tu cuenta
             </h1>
             <p className="mt-2 text-sm text-text-light/70 dark:text-text-dark/70">
-              Est\u00e1s a un paso de encontrar a tu nuevo mejor amigo.
+              Estas a un paso de encontrar a tu nuevo mejor amigo.
             </p>
           </div>
           <form className="mt-8 space-y-6" onSubmit={handleNext}>
@@ -40,7 +40,7 @@ export function Step1() {
                 className="text-sm font-medium text-text-light dark:text-text-dark"
                 htmlFor="email"
               >
-                Correo electr\u00f3nico
+                Correo electrónico
               </label>
               <div className="relative mt-2">
                 <span className="material-symbols-outlined pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3 text-text-light/50 dark:text-text-dark/50">

@@ -1,28 +1,30 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useRegister } from "./../hooks/useRegister.js";
 import { useNavigate } from "react-router-dom";
 
 export function Step2() {
   const { data, setField, setAvatar } = useRegister();
   const [username, setUsername] = useState(data.username || "");
-  // const [preview, setPreview] = useState(null);
+  const [preview, setPreview] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (data.avatarFile) {
-      const url = URL.createObjectURL(data.avatarFile);
-      // setPreview(url);
-      return () => URL.revokeObjectURL(url);
+    if (!data.avatarFile) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
+      setPreview(null);
+      return;
     }
-    // setPreview(null);
+
+    const url = URL.createObjectURL(data.avatarFile);
+    setPreview(url);
+
+    return () => URL.revokeObjectURL(url);
   }, [data.avatarFile]);
 
   const handleFile = (e) => {
     const file = e.target.files?.[0];
     if (!file) return;
     setAvatar(file);
-    // const url = URL.createObjectURL(file);
-    // setPreview(url);
   };
 
   const handleNext = (e) => {
@@ -50,9 +52,17 @@ export function Step2() {
         <div className="mt-8 flex flex-col items-center gap-6">
           <div className="relative group">
             <div className="size-32 rounded-full bg-primary/20 flex items-center justify-center overflow-hidden">
-              <span className="material-symbols-outlined text-6xl text-primary/50">
-                person
-              </span>
+              {preview ? (
+                <img
+                  src={preview}
+                  alt="Avatar preview"
+                  className="w-full h-full object-cover"
+                />
+              ) : (
+                <span className="material-symbols-outlined text-6xl text-primary/50">
+                  person
+                </span>
+              )}
             </div>
             <div className="absolute inset-0 rounded-full bg-black/60 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 cursor-pointer">
               <div className="text-center text-white">
@@ -92,7 +102,10 @@ export function Step2() {
           </div>
         </div>
         <div className="mt-8 flex flex-col gap-4">
-          <button type="button" onClick={() => navigate("../step1")} className="flex w-full min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-12 px-5 bg-primary text-white text-base font-bold leading-normal tracking-[0.015em] hover:bg-primary/90 transition-colors">
+          <button
+            type="submit"
+            className="flex w-full min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-12 px-5 bg-primary text-white text-base font-bold leading-normal tracking-[0.015em] hover:bg-primary/90 transition-colors"
+          >
             <span className="truncate">Guardar y continuar</span>
           </button>
           <button className="flex w-full min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-12 px-5 bg-transparent text-primary text-base font-bold leading-normal tracking-[0.015em] border-2 border-primary hover:bg-primary/10 transition-colors">
