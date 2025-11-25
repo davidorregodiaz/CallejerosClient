@@ -3,7 +3,6 @@ import { AuthContext } from "../context/AuthContext";
 
 export const useApi = () => {
   const { token, refreshToken } = useContext(AuthContext);
-  console.log("Token in useApi:", token);
 
   const authorizedApi = async (endpoint, options = {}, retry = true) => {
     let finalOptions = {

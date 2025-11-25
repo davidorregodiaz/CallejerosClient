@@ -16,8 +16,7 @@ export const UserLoggedIn = () => {
             className="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10 ring-2 ring-offset-2 ring-offset-surface-light dark:ring-offset-surface-dark ring-primary/50"
             data-alt="Avatar de usuario sonriendo"
             style={{
-              backgroundImage:
-                `url('${user?.imageUrl}')`,
+              backgroundImage: `url('${user?.imageUrl}')`,
             }}
           ></div>
         </button>
@@ -39,13 +38,15 @@ export const UserLoggedIn = () => {
             </div>
             <hr className="border-t border-border-light dark:border-border-dark my-1" />
             <Link
-              to={"/profile"}
+              to={"/user/general"}
               className="flex items-center gap-3 rounded px-3 py-2 text-sm text-text-light dark:text-text-dark hover:bg-primary/20 hover:text-primary transition-colors"
               href="#"
               role="menuitem"
               tabindex="-1"
             >
-              <span className="material-symbols-outlined text-base">person</span>
+              <span className="material-symbols-outlined text-base">
+                person
+              </span>
               Mi Perfil
             </Link>
             <a
@@ -54,7 +55,9 @@ export const UserLoggedIn = () => {
               role="menuitem"
               tabindex="-1"
             >
-              <span className="material-symbols-outlined text-base">favorite</span>
+              <span className="material-symbols-outlined text-base">
+                favorite
+              </span>
               Mis Favoritos
             </a>
             <a
@@ -76,7 +79,9 @@ export const UserLoggedIn = () => {
               role="menuitem"
               tabindex="-1"
             >
-              <span className="material-symbols-outlined text-base">logout</span>
+              <span className="material-symbols-outlined text-base">
+                logout
+              </span>
               Cerrar Sesión
             </button>
           </div>

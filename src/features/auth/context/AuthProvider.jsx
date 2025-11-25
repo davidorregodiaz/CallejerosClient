@@ -8,6 +8,10 @@ export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   // const api = useApi();
 
+  const userIsInRole = (role) => {
+    return user.roles != null && user.roles.includes(role);
+  }
+
   const login = async (userData) => {
     const options = {
       method: "POST",
@@ -85,7 +89,7 @@ export const AuthProvider = ({ children }) => {
 
   return (
     <AuthContext.Provider
-      value={{ token, login, logout, refreshToken, register, user }}
+      value={{ token, login, logout, refreshToken, register, user, userIsInRole }}
     >
       {children}
     </AuthContext.Provider>
