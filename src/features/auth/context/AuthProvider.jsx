@@ -6,11 +6,12 @@ import { API_URL } from "../../../shared/commons/constants";
 export const AuthProvider = ({ children }) => {
   const [token, setToken] = useState();
   const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
   // const api = useApi();
 
   const userIsInRole = (role) => {
-    return user.roles != null && user.roles.includes(role);
-  }
+    return user?.roles != null && user?.roles?.includes(role);
+  };
 
   const login = async (userData) => {
     const options = {
@@ -46,7 +47,9 @@ export const AuthProvider = ({ children }) => {
       try {
         await refreshToken();
       } catch (error) {
-        console.log("No se pudo refrescar token al iniciar ",error);
+        console.log("No se pudo refrescar token al iniciar ", error);
+      } finally {
+        setLoading(false);
       }
     };
 
@@ -69,7 +72,7 @@ export const AuthProvider = ({ children }) => {
     const { token: newToken, user } = await res.json();
     console.log("Token refreshed:", newToken);
     setToken(newToken);
-    setUser(user); 
+    setUser(user);
     return newToken;
   };
 
@@ -87,9 +90,19 @@ export const AuthProvider = ({ children }) => {
     setUser(user);
   };
 
+  if (loading) return <p>Cargando Sesion...</p>;
+
   return (
     <AuthContext.Provider
-      value={{ token, login, logout, refreshToken, register, user, userIsInRole }}
+      value={{
+        token,
+        login,
+        logout,
+        refreshToken,
+        register,
+        user,
+        userIsInRole,
+      }}
     >
       {children}
     </AuthContext.Provider>

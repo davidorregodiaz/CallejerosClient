@@ -1,9 +1,7 @@
 // RegisterSteps.jsx
-import { useReducer, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import { RegisterContext} from "../context/RegisterContext";
+import { useReducer, useEffect, useState } from "react";
+import { RegisterContext } from "../context/RegisterContext";
 import { useAuth } from "../../auth/hooks/useAuth";
-
 
 const STORAGE_KEY = "register_data_v1";
 
@@ -36,7 +34,7 @@ function reducer(state, action) {
 export function RegisterProvider({ children }) {
   const [state, dispatch] = useReducer(reducer, initialState);
   const { register } = useAuth();
-  const navigate = useNavigate();
+  const [progressBar, setProgressBar] = useState(1);
 
   // Cargar desde sessionStorage al montar
   useEffect(() => {
@@ -91,7 +89,6 @@ export function RegisterProvider({ children }) {
 
     await register(form);
     reset();
-    navigate("/");
   };
 
   return (
@@ -101,6 +98,8 @@ export function RegisterProvider({ children }) {
         setField,
         setAvatar,
         submitRegistration,
+        setProgressBar,
+        progressBar,
       }}
     >
       {children}

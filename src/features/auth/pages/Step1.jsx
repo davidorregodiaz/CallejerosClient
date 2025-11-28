@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useRegister } from "./../hooks/useRegister.js";
 
 export function Step1() {
-  const { data, setField } = useRegister();
+  const { data, setField, setProgressBar } = useRegister();
   const [localEmail, setLocalEmail] = useState(data.email || "");
   const [localPass, setLocalPass] = useState(data.password || "");
   const navigate = useNavigate();
@@ -18,12 +18,13 @@ export function Step1() {
     // Guardamos en el contexto
     setField("email", localEmail);
     setField("password", localPass);
+    setProgressBar(2);
     // Vamos al siguiente paso
     navigate("../step2");
   };
 
   return (
-    <div className="flex flex-1 items-center justify-center px-4 py-10 sm:py-20">
+    <div className="flex flex-1 items-center justify-center px-4 py-10 sm:py-20 animate-slide-in-right">
       <div className="w-full max-w-md">
         <div className="rounded-xl border border-solid border-primary/20 bg-white dark:bg-background-dark/50 p-6 shadow-sm sm:p-8">
           <div className="flex flex-col items-center text-center">
@@ -43,13 +44,14 @@ export function Step1() {
                 Correo electrónico
               </label>
               <div className="relative mt-2">
-                <span className="material-symbols-outlined pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3 text-text-light/50 dark:text-text-dark/50">
+                <span className="material-symbols-outlined pointer-events-none absolute left-0 inset-y-2 pl-3 text-text-light/50 dark:text-text-dark/50">
                   mail
                 </span>
+
                 <input
                   value={localEmail}
                   onChange={(e) => setLocalEmail(e.target.value)}
-                  className="w-full rounded-lg border border-solid border-primary/30 bg-background-light/50 dark:bg-background-dark/30 py-2.5 pl-10 pr-4 text-sm text-text-light dark:text-text-dark placeholder-text-light/50 dark:placeholder-text-dark/50 focus:border-primary focus:ring-primary"
+                  className="w-full outline-0 rounded-lg border border-solid border-primary/30 bg-background-light/50 dark:bg-background-dark/30 py-2.5 pl-10 pr-4 text-sm text-text-light dark:text-text-dark placeholder-text-light/50 dark:placeholder-text-dark/50 focus:border-primary focus:ring-primary"
                   id="email"
                   placeholder="tu@correo.com"
                   type="email"
@@ -64,13 +66,13 @@ export function Step1() {
                 Contrase\u00f1a
               </label>
               <div className="relative mt-2">
-                <span className="material-symbols-outlined pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3 text-text-light/50 dark:text-text-dark/50">
+                <span className="material-symbols-outlined pointer-events-none absolute inset-y-2 left-0 flex items-center pl-3 text-text-light/50 dark:text-text-dark/50">
                   lock
                 </span>
                 <input
                   value={localPass}
                   onChange={(e) => setLocalPass(e.target.value)}
-                  className="w-full rounded-lg border border-solid border-primary/30 bg-background-light/50 dark:bg-background-dark/30 py-2.5 pl-10 pr-4 text-sm text-text-light dark:text-text-dark placeholder-text-light/50 dark:placeholder-text-dark/50 focus:border-primary focus:ring-primary"
+                  className="w-full outline-0 rounded-lg border border-solid border-primary/30 bg-background-light/50 dark:bg-background-dark/30 py-2.5 pl-10 pr-4 text-sm text-text-light dark:text-text-dark placeholder-text-light/50 dark:placeholder-text-dark/50 focus:border-primary focus:ring-primary"
                   id="password"
                   placeholder="Crea una contrasena segura"
                   type="password"

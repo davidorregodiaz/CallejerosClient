@@ -3,7 +3,7 @@ import { useRegister } from "./../hooks/useRegister.js";
 import { useNavigate } from "react-router-dom";
 
 export function Step2() {
-  const { data, setField, setAvatar } = useRegister();
+  const { data, setField, setAvatar, setProgressBar } = useRegister();
   const [username, setUsername] = useState(data.username || "");
   const [preview, setPreview] = useState(null);
   const navigate = useNavigate();
@@ -34,13 +34,14 @@ export function Step2() {
       return;
     }
     setField("username", username);
+    setProgressBar(3);
     navigate("../step3");
   };
 
   return (
     <form
       onSubmit={handleNext}
-      className="flex flex-1 flex-col items-center justify-center py-10"
+      className="flex flex-1 flex-col items-center justify-center py-10 animate-slide-in-right"
     >
       <div className="w-full max-w-md rounded-xl border border-primary/20 bg-white/50 dark:bg-background-dark/50 p-6 md:p-8 text-center shadow-lg">
         <h1 className="text-2xl font-bold leading-tight tracking-[-0.015em] text-text-light dark:text-text-dark">
@@ -93,7 +94,7 @@ export function Step2() {
               <input
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
-                className="w-full h-12 pl-10 pr-4 rounded-lg border border-primary/30 bg-background-light dark:bg-background-dark/80 focus:ring-2 focus:ring-primary focus:border-primary transition-colors"
+                className="w-full h-12 pl-10 pr-4 rounded-lg border border-primary/30 bg-background-light focus:ring-1 focus:ring-primary focus:border-primary transition-colors outline-0"
                 id="username"
                 placeholder="Ej: AmanteDeMascotas123"
                 type="text"
@@ -106,10 +107,7 @@ export function Step2() {
             type="submit"
             className="flex w-full min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-12 px-5 bg-primary text-white text-base font-bold leading-normal tracking-[0.015em] hover:bg-primary/90 transition-colors"
           >
-            <span className="truncate">Guardar y continuar</span>
-          </button>
-          <button className="flex w-full min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-12 px-5 bg-transparent text-primary text-base font-bold leading-normal tracking-[0.015em] border-2 border-primary hover:bg-primary/10 transition-colors">
-            <span className="truncate">Volver</span>
+            <span className="truncate">Siguiente</span>
           </button>
         </div>
       </div>

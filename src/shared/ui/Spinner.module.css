@@ -1,0 +1,38 @@
+.spin {
+  transform-origin: 50% 50%;
+  animation: spin 3s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.pawDraw {
+  stroke-dasharray: 220;
+  stroke-dashoffset: 220;
+  animation: draw 2s ease-in-out infinite;
+}
+
+@keyframes draw {
+  0% { stroke-dashoffset: 220; opacity: 0.7; }
+  50% { stroke-dashoffset: 40; opacity: 1; }
+  100% { stroke-dashoffset: 220; opacity: 0.7; }
+}
+
+.pawPad {
+  transform-origin: center;
+  animation: pawBounce 1.2s ease-in-out infinite;
+}
+
+.p1 { animation-delay: 0s; }
+.p2 { animation-delay: 0.08s; }
+.p3 { animation-delay: 0.16s; }
+.p4 { animation-delay: 0.24s; }
+
+@keyframes pawBounce {
+  0% { transform: translateY(0) scale(1); opacity: 0.9; }
+  40% { transform: translateY(-6%) scale(1.06); opacity: 1; }
+  80% { transform: translateY(0) scale(0.98); opacity: 0.95; }
+  100% { transform: translateY(0) scale(1); opacity: 0.9; }
+}

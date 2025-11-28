@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useAuth } from "../hooks/useAuth";
 import { useNavigate } from "react-router-dom";
-import { Link } from "react-router-dom"
+import { Link } from "react-router-dom";
 
 export const Login = () => {
   const { login } = useAuth();
@@ -28,9 +28,8 @@ export const Login = () => {
     });
 
     console.log(accessToken);
-    
-    if(accessToken) navigate("/");
 
+    if (accessToken) navigate("/");
   };
 
   return (
@@ -56,7 +55,7 @@ export const Login = () => {
                 </div>
               </div>
             </div>
-            <div className="flex flex-1 items-center justify-center p-6 md:p-12 lg:p-16">
+            <div className="flex flex-1 items-center justify-center p-6 md:p-12 lg:p-16 animate-slide-in-right">
               <div className="w-full max-w-md">
                 <div className="text-center mb-10">
                   <div className="inline-flex items-center gap-3 mb-3">
@@ -90,7 +89,7 @@ export const Login = () => {
                       name="email"
                       value={htmlForm.email}
                       onChange={handleChange}
-                      className="mt-1 w-full rounded-lg border-gray-300/50 dark:border-gray-700/50 bg-background-light dark:bg-background-dark/50 focus:border-primary focus:ring-primary/50"
+                      className="mt-1 p-1 w-full rounded-lg border-2 border-gray-300/50 bg-background-light focus:border-primary  outline-0"
                       id="email"
                       placeholder="tu@email.com"
                       type="email"
@@ -112,7 +111,7 @@ export const Login = () => {
                       name="password"
                       value={htmlForm.password}
                       onChange={handleChange}
-                      className="mt-1 w-full rounded-lg border-gray-300/50 dark:border-gray-700/50 bg-background-light dark:bg-background-dark/50 focus:border-primary focus:ring-primary/50"
+                      className="mt-1 p-1 w-full rounded-lg border-2 border-gray-300/50  bg-background-light  focus:border-primary focus:ring-primary outline-0"
                       id="password"
                       placeholder="••••••••"
                       type="password"

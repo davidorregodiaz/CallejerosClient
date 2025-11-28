@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useApi } from "../../auth/hooks/useApi";
+import { API_URL } from "../../../shared/commons/constants";
 
 export const useCreateAnimal = () => {
   const [loading, setLoading] = useState(false);
@@ -10,7 +11,7 @@ export const useCreateAnimal = () => {
     setLoading(true);
     setError(null);
     try {
-      const res = await api("/animals", {
+      const res = await api(`${API_URL}/animals`, {
         method: "POST",
         body: formData,
       });
@@ -24,7 +25,6 @@ export const useCreateAnimal = () => {
       setLoading(false);
     }
   };
-
 
   return { createAnimal, loading, error };
 };

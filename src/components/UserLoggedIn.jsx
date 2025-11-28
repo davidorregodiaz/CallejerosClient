@@ -23,9 +23,9 @@ export const UserLoggedIn = () => {
         <div
           aria-labelledby="menu-button"
           aria-orientation="vertical"
-          className="absolute right-0 mt-3 w-64 origin-top-right rounded bg-surface-light dark:bg-surface-dark shadow-lg ring-border-light focus:outline-none opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200"
+          className="absolute right-0 z-1000 mt-3 w-64 origin-top-right rounded bg-surface-light dark:bg-surface-dark shadow-lg ring-border-light focus:outline-none opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200"
           role="menu"
-          tabindex="-1"
+          tabIndex="-1"
         >
           <div className="py-2 px-2 bg-white rounded" role="none">
             <div className="px-3 py-2">
@@ -42,7 +42,7 @@ export const UserLoggedIn = () => {
               className="flex items-center gap-3 rounded px-3 py-2 text-sm text-text-light dark:text-text-dark hover:bg-primary/20 hover:text-primary transition-colors"
               href="#"
               role="menuitem"
-              tabindex="-1"
+              tabIndex="-1"
             >
               <span className="material-symbols-outlined text-base">
                 person
@@ -53,7 +53,7 @@ export const UserLoggedIn = () => {
               className="flex items-center gap-3 rounded px-3 py-2 text-sm text-text-light dark:text-text-dark hover:bg-primary/20 hover:text-primary transition-colors"
               href="#"
               role="menuitem"
-              tabindex="-1"
+              tabIndex="-1"
             >
               <span className="material-symbols-outlined text-base">
                 favorite
@@ -64,7 +64,7 @@ export const UserLoggedIn = () => {
               className="flex items-center gap-3 rounded px-3 py-2 text-sm text-text-light dark:text-text-dark hover:bg-primary/20 hover:text-primary transition-colors"
               href="#"
               role="menuitem"
-              tabindex="-1"
+              tabIndex="-1"
             >
               <span className="material-symbols-outlined text-base">
                 description
@@ -77,7 +77,7 @@ export const UserLoggedIn = () => {
               className="flex items-center gap-3 rounded px-3 py-2 text-sm text-red-600 dark:text-red-400 hover:bg-red-500/10 dark:hover:bg-red-400/20 transition-colors"
               href="#"
               role="menuitem"
-              tabindex="-1"
+              tabIndex="-1"
             >
               <span className="material-symbols-outlined text-base">
                 logout

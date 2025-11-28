@@ -5,7 +5,7 @@ export const ChangePassword = () => {
         Cambiar Contraseña
       </h2>
       <form className="p-4 space-y-6">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 items-center">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 items-center rounded-lg">
           <label
             className="text-sm font-medium text-text-light dark:text-text-dark"
             for="current-password"
@@ -13,12 +13,12 @@ export const ChangePassword = () => {
             Contraseña Actual
           </label>
           <input
-            className="md:col-span-2 w-full rounded-lg border-border-light dark:border-border-dark bg-surface-light dark:bg-surface-dark focus:ring-primary focus:border-primary"
+            className="md:col-span-2 w-full rounded-lg border border-border-dark dark:border-border-light bg-surface-light dark:bg-surface-dark focus:ring-primary focus:outline-0 focus:border-primary bg-white/5 dark:bg-white p-1"
             id="current-password"
             type="password"
           />
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 items-center">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 items-center rounded-lg">
           <label
             className="text-sm font-medium text-text-light dark:text-text-dark"
             for="new-password"
@@ -26,12 +26,12 @@ export const ChangePassword = () => {
             Nueva Contraseña
           </label>
           <input
-            className="md:col-span-2 w-full rounded-lg border-border-light dark:border-border-dark bg-surface-light dark:bg-surface-dark focus:ring-primary focus:border-primary"
+            className="md:col-span-2 w-full rounded-lg border dark:border-border-light bg-surface-light dark:bg-surface-dark focus:ring-primary focus:border-primary focus:outline-0 bg-white/5 dark:bg-white p-1"
             id="new-password"
             type="password"
           />
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 items-center">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 items-center rounded-lg">
           <label
             className="text-sm font-medium text-text-light dark:text-text-dark"
             for="confirm-password"
@@ -39,20 +39,20 @@ export const ChangePassword = () => {
             Confirmar Nueva Contraseña
           </label>
           <input
-            className="md:col-span-2 w-full rounded-lg border-border-light dark:border-border-dark bg-surface-light dark:bg-surface-dark focus:ring-primary focus:border-primary"
+            className="md:col-span-2 w-full rounded-lg border dark:border-border-light bg-surface-light dark:bg-surface-dark focus:ring-primary focus:border-primary focus:outline-0 bg-white/5 dark:bg-white p-1"
             id="confirm-password"
             type="password"
           />
         </div>
         <div className="flex justify-end gap-3 mt-6">
           <button
-            className="px-4 py-2 rounded-lg text-sm font-semibold border border-border-light dark:border-border-dark hover:bg-gray-100 dark:hover:bg-gray-700"
+            className="px-4 py-2 rounded-lg text-sm font-semibold border border-border-light dark:border-border-light hover:bg-gray-100 dark:hover:bg-gray-100 cursor-pointer"
             type="button"
           >
             Cancelar
           </button>
           <button
-            className="px-4 py-2 rounded-lg text-sm font-semibold bg-primary text-text-light hover:bg-opacity-80"
+            className="px-4 py-2 rounded-lg text-sm font-semibold bg-primary text-text-light hover:bg-opacity-80 cursor-pointer"
             type="submit"
           >
             Actualizar Contraseña

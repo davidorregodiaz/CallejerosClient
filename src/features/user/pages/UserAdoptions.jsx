@@ -2,27 +2,31 @@ import { useEffect, useState } from "react";
 import { useApi } from "../../auth/hooks/useApi";
 import { API_URL } from "../../../shared/commons/constants";
 import { useAuth } from "../../auth/hooks/useAuth";
+import { Link } from "react-router-dom";
+import { AdoptionRequestCard } from "../../animals/components/AdoptionRequestCard.jsx";
 
 export const UserAdoptions = () => {
-  const { adoptions, setAdoptions } = useState(null);
+  const [adoptions, setAdoptions] = useState(null);
   const { userIsInRole } = useAuth();
-  const { api } = useApi();
+
+  const api = useApi();
 
   useEffect(() => {
     const fetchAdoptions = async () => {
-      await api(`${API_URL}/users/adoptions`)
+      await api(`${API_URL}/users/animals`)
         .then((res) => {
           if (!res.ok) throw new Error("Algo salio mal");
           return res.json();
         })
-        .then((data) => setAdoptions(data))
+        .then((response) => setAdoptions(response.data))
         .catch((ex) => console.log("Excepcion del lado del cliente: ", ex));
     };
     fetchAdoptions();
   }, []);
 
+  console.log(adoptions);
   return (
-    <div className="font-display bg-background-light dark:bg-background-dark text-text-light dark:text-text-dark">
+    <div className="font-display bg-white dark:bg-background-dark text-text-light dark:text-text-dark">
       <div className="relative flex h-auto min-h-screen w-full flex-col">
         <div className="flex h-full min-h-screen">
           <div className="flex-1 p-6 md:p-10 overflow-y-auto">
@@ -33,9 +37,9 @@ export const UserAdoptions = () => {
                     Mis Adopciones
                   </h2>
                   {userIsInRole("Owner") ? (
-                    <a
+                    <Link
                       className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg text-base font-semibold bg-primary text-text-light hover:bg-opacity-80 transition-colors"
-                      href="#"
+                      to="/user/adoptions/create"
                     >
                       <span
                         className="material-symbols-outlined"
@@ -46,13 +50,13 @@ export const UserAdoptions = () => {
                         add_circle
                       </span>
                       Crear Adopción
-                    </a>
+                    </Link>
                   ) : (
                     ""
                   )}
                 </div>
                 <div className="mt-8">
-                  <div className="border border-border-light dark:border-border-dark rounded-xl bg-surface-light dark:bg-surface-dark overflow-hidden">
+                  <div className="border border-border-light dark:border-border-light rounded-xl bg-surface-light dark:bg-surface-dark overflow-hidden">
                     <div className="p-6">
                       <h3 className="text-xl font-bold text-text-light dark:text-text-dark">
                         Tus Animales en Adopción

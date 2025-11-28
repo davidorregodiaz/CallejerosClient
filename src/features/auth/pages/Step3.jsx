@@ -1,10 +1,17 @@
 import { useState } from "react";
 import { useRegister } from "../hooks/useRegister";
+import { Spinner } from "../../../shared/ui/Spinner";
+import { useNavigate } from "react-router-dom";
+import { ErrorToast } from "../../../shared/ui/ErrorToast";
 
 export function Step3() {
-  const { data, setField, submitRegistration } = useRegister();
+  const { data, setField, submitRegistration, setProgressBar } = useRegister();
   const [role, setRole] = useState(data.role || "");
   const [selectedRole, setSelectedRole] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
+  const [errorToast, setErrorToast] = useState(null);
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -14,18 +21,35 @@ export function Step3() {
     }
 
     try {
+      setLoading(true);
       const result = await submitRegistration();
       console.log("Registrado:", result);
+      setSuccess(true);
     } catch (err) {
-      alert("Error al registrarse: " + err.message);
+      setErrorToast(err.message);
+    } finally {
+      setLoading(false);
     }
   };
 
+  if (success) {
+    setProgressBar(4);
+    navigate("../completed");
+  }
+
+  // if (errorToast) return <ErrorToast errorMessage={errorToast} />;
+
+  if (loading) return <Spinner />;
+
   return (
+    <>{errorToast && (
+        <ErrorToast errorMessage={errorToast}/>
+      )}
     <form
       onSubmit={handleSubmit}
-      className="flex flex-1 flex-col items-center justify-center p-4"
+      className="flex flex-1 flex-col items-center justify-center p-4 animate-slide-in-right"
     >
+      
       <div className="w-full max-w-lg rounded-xl border border-stone-200/80  bg-white shadow-sm p-8 text-center">
         <h1 className="text-2xl font-bold tracking-tight text-text-light">
           Casi listo! Elige tu rol
@@ -45,7 +69,7 @@ export function Step3() {
               selectedRole === "owner"
                 ? "border-primary"
                 : "border-stone-200/80"
-            } flex select-none flex-col items-center justify-between rounded-lg border p-6 transition-all hover:shadow-lg hover:border-primary`}
+            } flex select-none flex-col items-center justify-between rounded-lg border p-6 transition-all hover:shadow-lg cursor-pointer hover:border-primary`}
           >
             <div className="flex flex-col items-center">
               <div className="flex h-12 w-12 items-center justify-center rounded-full bg-primary/20 text-primary">
@@ -72,7 +96,7 @@ export function Step3() {
               selectedRole === "requester"
                 ? "border-primary"
                 : "border-stone-200/80"
-            } flex select-none flex-col items-center justify-between rounded-lg border p-6 transition-all hover:shadow-lg hover:border-primary`}
+            } flex select-none flex-col items-center justify-between rounded-lg border p-6 transition-all hover:shadow-lg cursor-pointer hover:border-primary`}
           >
             <div className="flex flex-col items-center">
               <div className="flex h-12 w-12 items-center justify-center rounded-full  text-primary">
@@ -91,12 +115,14 @@ export function Step3() {
         <div className="mt-6">
           <button
             type="submit"
-            className="px-6 py-2 bg-primary text-white rounded"
+            className="px-6 py-2 bg-primary text-white border border-border-primary rounded cursor-pointer
+            hover:bg-primary/90 transition-colors"
           >
-            Continuar
+            Finalizar registro
           </button>
         </div>
       </div>
-    </form>
+      </form>
+      </>
   );
 }
