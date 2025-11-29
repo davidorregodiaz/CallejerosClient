@@ -60,8 +60,6 @@ export function AnimalDetails() {
     return arr.map((v) => map?.[v] ?? v).join(", ");
   };
 
-  console.log("Animal recibido:", animal);
-
   return (
     <>
       {adoptionForm ? (

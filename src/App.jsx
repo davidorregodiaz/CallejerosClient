@@ -12,6 +12,9 @@ import { General } from "./features/user/pages/General.jsx";
 import { UserAdoptions } from "./features/user/pages/UserAdoptions.jsx";
 import { EditProfile } from "./features/user/pages/EditProfile.jsx";
 import { ChangePassword } from "./features/user/pages/ChangePassword.jsx";
+import { Requests } from "./features/user/Requests.jsx";
+import { RequestDetails } from "./features/user/pages/RequestDetails.jsx";
+import { AppointmentForm } from "./features/user/pages/AppointmentForm.jsx";
 
 function App() {
   return (
@@ -35,6 +38,9 @@ function App() {
           <Route path="edit" element={<EditProfile />} />
           <Route path="adoptions/create" element={<CreateAdoption />} />
           <Route path="password" element={<ChangePassword />} />
+          <Route path="requests" element={<Requests />} />
+          <Route path="requests/:id" element={<RequestDetails />} />
+          <Route path="requests/appointment" element={<AppointmentForm />} />
         </Route>
 
         {/* Redirección por defecto si no hay match */}

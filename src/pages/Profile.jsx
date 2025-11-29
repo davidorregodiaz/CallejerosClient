@@ -16,7 +16,7 @@ export const Profile = () => {
     <div className="font-display bg-white dark:bg-background-dark text-text-light dark:text-text-dark">
       <div className="relative flex h-auto min-h-screen w-full flex-col">
         <div className="flex h-full min-h-screen">
-          <aside className="w-64 flex-shrink-0 bg-surface-light dark:bg-surface-dark border-r border-border-light dark:border-border-dark">
+          <aside className="w-64 shrink-0 bg-surface-light dark:bg-surface-dark border-r border-border-light dark:border-border-dark">
             <div className="flex h-full flex-col justify-between p-4">
               <div className="flex flex-col gap-4">
                 <div className="flex gap-3 items-center p-2">
@@ -71,6 +71,24 @@ export const Profile = () => {
                     </span>
                     <p className="text-sm font-medium leading-normal text-text-light dark:text-text-dark">
                       Mis Adopciones
+                    </p>
+                  </NavLink>
+                  <NavLink
+                    className={({ isActive }) =>
+                      isActive
+                        ? "flex items-center gap-3 px-3 py-2 rounded-lg bg-primary/20"
+                        : "flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-primary/10 transition-colors"
+                    }
+                    to="/user/requests"
+                  >
+                    <span
+                      className="material-symbols-outlined text-text-light dark:text-text-dark"
+                      style={{ fontVariationSettings: "'FILL' 0" }}
+                    >
+                      assignment
+                    </span>
+                    <p className="text-sm font-medium leading-normal text-text-light dark:text-text-dark">
+                      Solicitudes
                     </p>
                   </NavLink>
                   <NavLink

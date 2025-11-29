@@ -1,0 +1,153 @@
+export const AppointmentForm = () => {
+  return (
+    <div className="font-display bg-background-light  text-slate-800 ">
+      <div className="container mx-auto max-w-4xl p-4 sm:p-6 lg:p-8">
+        <header className="mb-8 text-center">
+          <h1 className="text-3xl font-bold text-slate-900 ">
+            Formulario para Agendar Cita
+          </h1>
+          <p className="text-slate-600  mt-2">
+            Completa los detalles para programar la reunión con Elena García
+            para la adopción de Bruno.
+          </p>
+        </header>
+        <div className="bg-white  rounded-xl shadow-sm ring-1 ring-slate-900/5">
+          <form className="p-6 sm:p-8">
+            <div className="space-y-8">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                  <label
+                    className="block text-sm font-medium text-slate-700  mb-1.5"
+                    for="appointment-date"
+                  >
+                    Fecha de la Cita
+                  </label>
+                  <div className="relative">
+                    <input
+                      className="block w-full rounded-lg border-slate-300  bg-slate-50  p-3 pl-10 text-slate-800  focus:border-primary focus:ring focus:ring-primary/20"
+                      id="appointment-date"
+                      type="date"
+                    />
+                    <span className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+                      <span className="material-symbols-outlined text-slate-500 ">
+                        calendar_today
+                      </span>
+                    </span>
+                  </div>
+                </div>
+                <div>
+                  <label
+                    className="block text-sm font-medium text-slate-700  mb-1.5"
+                    for="appointment-time"
+                  >
+                    Hora de la Cita
+                  </label>
+                  <div className="relative">
+                    <input
+                      className="block w-full rounded-lg border-slate-300  bg-slate-50  p-3 pl-10 text-slate-800  focus:border-primary focus:ring focus:ring-primary/20"
+                      id="appointment-time"
+                      type="time"
+                    />
+                    <span className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+                      <span className="material-symbols-outlined text-slate-500 ">
+                        schedule
+                      </span>
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <div>
+                <label
+                  className="block text-sm font-medium text-slate-700  mb-1.5"
+                  for="duration"
+                >
+                  Duración Estimada
+                </label>
+                <select
+                  className="block w-full rounded-lg border-slate-300  bg-slate-50  p-3 text-slate-800  focus:border-primary focus:ring focus:ring-primary/20"
+                  id="duration"
+                >
+                  <option>30 minutos</option>
+                  <option>45 minutos</option>
+                  <option selected="">60 minutos</option>
+                  <option>90 minutos</option>
+                </select>
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-slate-700  mb-1.5">
+                  Ubicación de la Cita
+                </label>
+                <div className="mt-2 grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <label className="flex items-center gap-3 p-4 rounded-lg border border-slate-300  has-checked:border-primary has-checked:ring-2 has-checked:ring-primary/30 cursor-pointer">
+                    <input
+                      checked=""
+                      className="form-radio text-primary focus:ring-primary/50"
+                      name="location-type"
+                      type="radio"
+                      value="presencial"
+                    />
+                    <span className="font-medium text-slate-800 ">
+                      Presencial
+                    </span>
+                  </label>
+                  <label className="flex items-center gap-3 p-4 rounded-lg border border-slate-300  has-checked:border-primary has-checked:ring-2 has-checked:ring-primary/30 cursor-pointer">
+                    <input
+                      className="form-radio text-primary focus:ring-primary/50"
+                      name="location-type"
+                      type="radio"
+                      value="virtual"
+                    />
+                    <span className="font-medium text-slate-800 ">Virtual</span>
+                  </label>
+                </div>
+                <div className="mt-4">
+                  <label className="sr-only" for="location-details">
+                    Detalles de la ubicación
+                  </label>
+                  <div className="relative">
+                    <input
+                      className="block w-full rounded-lg border-slate-300  bg-slate-50  p-3 pl-10 text-slate-800  focus:border-primary focus:ring focus:ring-primary/20"
+                      id="location-details"
+                      placeholder="Introduce la dirección o el enlace de la reunión"
+                      type="text"
+                    />
+                    <span className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+                      <span className="material-symbols-outlined text-slate-500 ">
+                        location_on
+                      </span>
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <div>
+                <label
+                  className="block text-sm font-medium text-slate-700  mb-1.5"
+                  for="notes"
+                >
+                  Notas o Instrucciones Especiales
+                </label>
+                <textarea
+                  className="block w-full rounded-lg border-slate-300  bg-slate-50  p-3 text-slate-800  focus:border-primary focus:ring focus:ring-primary/20"
+                  id="notes"
+                  placeholder="Ej: Por favor, traer identificación. La reunión será para conocer al animal..."
+                  rows="4"
+                ></textarea>
+              </div>
+              <div className="pt-4 border-t border-slate-200 ">
+                <button
+                  className="w-full flex items-center justify-center gap-2 rounded-lg bg-primary text-slate-900 px-4 py-3 font-bold hover:bg-green-400 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary focus:ring-offset-background-light "
+                  type="submit"
+                >
+                  <span className="material-symbols-outlined">
+                    check_circle
+                  </span>
+                  Confirmar Cita
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  );
+};
