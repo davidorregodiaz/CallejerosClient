@@ -6,7 +6,7 @@ export const RequestCard = ({ adoption }) => {
 
   return (
     <div
-      className="bg-white rounded-lg p-5 flex items-start gap-5 border border-slate-200 hover:bg-primary/30 cursor-pointer transition-colors"
+      className="bg-white rounded-lg p-5 flex items-start gap-5 border border-slate-200 hover:bg-primary/20 cursor-pointer transition-colors"
       onClick={() => navigate(`/user/requests/${adoption?.adoptionRequestId}`)}
     >
       <img
@@ -32,14 +32,6 @@ export const RequestCard = ({ adoption }) => {
         <p className="text-sm text-slate-600  mt-1">
           Mensaje: "{adoption.comments}"
         </p>
-        <div className="mt-4 flex gap-3">
-          <button className="inline-flex items-center justify-center rounded-md px-4 py-2 text-sm font-medium bg-primary text-slate-900 hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-primary/50 transition-colors cursor-pointer focus:ring-offset-2">
-            Aceptar
-          </button>
-          <button className="inline-flex items-center justify-center rounded-md px-4 py-2 text-sm font-medium bg-slate-200 text-slate-800 hover:bg-slate-300 focus:outline-none focus:ring-2 cursor-pointer transition-colors focus:ring-slate-400 focus:ring-offset-2">
-            Rechazar
-          </button>
-        </div>
       </div>
     </div>
   );

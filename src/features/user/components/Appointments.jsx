@@ -2,7 +2,7 @@ import { AppointmentCard } from "./AppointmentCard";
 
 export const Appointments = ({ appointments }) => {
   return (
-    <div className="bg-white  rounded-xl shadow-sm ring-1 ring-slate-900/5 mt-12">
+    <div className="bg-white  rounded-xl shadow-sm ring-1 ring-slate-900/5">
       <div className="p-6">
         <h2 className="text-xl font-bold text-slate-900 ">
           Citas Agendadas para esta Solicitud

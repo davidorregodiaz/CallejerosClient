@@ -15,6 +15,7 @@ import { ChangePassword } from "./features/user/pages/ChangePassword.jsx";
 import { Requests } from "./features/user/Requests.jsx";
 import { RequestDetails } from "./features/user/pages/RequestDetails.jsx";
 import { AppointmentForm } from "./features/user/pages/AppointmentForm.jsx";
+import { RescheduleAppoinmentForm } from "./features/user/components/RescheduleAppointmentForm.jsx";
 
 function App() {
   return (

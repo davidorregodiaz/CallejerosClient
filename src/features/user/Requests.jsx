@@ -1,7 +1,10 @@
+import { useAuth } from "../auth/hooks/useAuth";
 import { RequestCard } from "./components/RequestCard";
 import { useAdoptions } from "./hooks/useAdoptions";
+import { RequesterRequestCard } from "./components/RequesterRequestCard";
 
 export const Requests = () => {
+  const { userIsInRole } = useAuth();
   const { adoptions, loading, error } = useAdoptions();
   console.log(adoptions);
 
@@ -16,9 +19,13 @@ export const Requests = () => {
           Solicitudes de Adopción
         </h2>
         <div className="space-y-4">
-          {adoptions?.map((d) => (
-            <RequestCard key={d.id} adoption={d} />
-          ))}
+          {adoptions?.map((d) =>
+            userIsInRole("Owner") ? (
+              <RequestCard key={d.id} adoption={d} />
+            ) : (
+              <RequesterRequestCard key={d.id} adoption={d} />
+            )
+          )}
         </div>
       </div>
     </div>

@@ -4,7 +4,7 @@ import { useNavigate, NavLink } from "react-router-dom";
 import { Link } from "react-router-dom";
 
 export const Profile = () => {
-  const { user, logout } = useAuth();
+  const { user, logout, userIsInRole } = useAuth();
   const navigate = useNavigate();
 
   const handleLogout = () => {
@@ -55,24 +55,28 @@ export const Profile = () => {
                       General
                     </p>
                   </NavLink>
-                  <NavLink
-                    className={({ isActive }) =>
-                      isActive
-                        ? "flex items-center gap-3 px-3 py-2 rounded-lg bg-primary/20"
-                        : "flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-primary/10 transition-colors"
-                    }
-                    to="/user/adoptions"
-                  >
-                    <span
-                      className="material-symbols-outlined text-text-light dark:text-text-dark"
-                      style={{ fontVariationSettings: "'FILL' 0" }}
+                  {userIsInRole("Owner") ? (
+                    <NavLink
+                      className={({ isActive }) =>
+                        isActive
+                          ? "flex items-center gap-3 px-3 py-2 rounded-lg bg-primary/20"
+                          : "flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-primary/10 transition-colors"
+                      }
+                      to="/user/adoptions"
                     >
-                      favorite
-                    </span>
-                    <p className="text-sm font-medium leading-normal text-text-light dark:text-text-dark">
-                      Mis Adopciones
-                    </p>
-                  </NavLink>
+                      <span
+                        className="material-symbols-outlined text-text-light dark:text-text-dark"
+                        style={{ fontVariationSettings: "'FILL' 0" }}
+                      >
+                        favorite
+                      </span>
+                      <p className="text-sm font-medium leading-normal text-text-light dark:text-text-dark">
+                        Mis Adopciones
+                      </p>
+                    </NavLink>
+                  ) : (
+                    ""
+                  )}
                   <NavLink
                     className={({ isActive }) =>
                       isActive
