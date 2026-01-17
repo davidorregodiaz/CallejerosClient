@@ -1,11 +1,12 @@
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import { useApi } from "../../auth/hooks/useApi";
 import { API_URL } from "../../../shared/commons/constants";
 import { useState } from "react";
 import { Appointments } from "./Appointments";
+import { Link } from "react-router-dom";
 
 export const OwnerRequestDetails = ({ adoption, id }) => {
-  const navigate = useNavigate();
+  //const navigate = useNavigate();
   const api = useApi();
   const [error, setError] = useState(null);
 
@@ -133,15 +134,13 @@ export const OwnerRequestDetails = ({ adoption, id }) => {
             Gestiona el siguiente paso para esta solicitud.
           </p>
           <div className="space-y-3">
-            <button
-              onClick={() => {
-                navigate("/user/requests/appointment");
-              }}
+            <Link
+              to={`/user/requests/${id}/appointment`}
               className="w-full cursor-pointer flex items-center justify-center gap-2 rounded-lg bg-slate-800  text-white  px-4 py-3 font-bold hover:bg-slate-700  transition-colors"
             >
               <span className="material-symbols-outlined">calendar_month</span>
               Agendar Cita
-            </button>
+            </Link>
             {isCancelled ? (
               <button
                 disabled

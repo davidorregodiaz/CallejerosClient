@@ -1,3 +1,4 @@
+import { useParams } from "react-router-dom";
 import { useState } from "react";
 import { useApi } from "../../auth/hooks/useApi";
 import { API_URL } from "../../../shared/commons/constants";
@@ -13,9 +14,10 @@ export const AppointmentForm = () => {
     title: "",
     message: "",
   });
+  const { id } = useParams();
 
   const [form, setForm] = useState({
-    adoptionRequestId: "ba436cab-8f9f-475b-aaec-10261d478f8d",
+    adoptionRequestId: id,
     date: "",
     time: "",
     notes: "",

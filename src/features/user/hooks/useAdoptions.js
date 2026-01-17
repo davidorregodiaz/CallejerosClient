@@ -12,12 +12,16 @@ export const useAdoptions = () => {
     setLoading(true);
     setError(null);
     try {
-      const res = await api(`${API_URL}/adoptions`, { method: "GET" });
-      if (!res.ok) {
+      const response = await api(`${API_URL}/adoptions`, { method: "GET" });
+      if (!response.ok) {
         throw new Error("Error al obtener los animales");
       }
-      const { data } = await res.json();
-      setAdoptions(data);
+      if (response.status === 204) {
+        setAdoptions([]);
+      } else {
+        const { data } = await response.json();
+        setAdoptions(data);
+      }
     } catch (err) {
       setError(err);
     } finally {

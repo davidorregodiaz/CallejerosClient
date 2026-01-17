@@ -63,13 +63,13 @@ export const AuthProvider = ({ children }) => {
 
   const refreshToken = async () => {
     const res = await fetch(`${API_URL}/auth/refresh-token`, {
-      method: "GET",
+      method: "POST",
       credentials: "include",
     });
 
     if (!res.ok) setToken(null);
 
-    const { token: newToken, user } = await res.json();
+    const { accessToken: newToken, user } = await res.json();
     console.log("Token refreshed:", newToken);
     setToken(newToken);
     setUser(user);

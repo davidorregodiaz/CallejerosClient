@@ -13,7 +13,7 @@ export const UserAdoptions = () => {
 
   useEffect(() => {
     const fetchAdoptions = async () => {
-      await api(`${API_URL}/users/animals`)
+      await api(`${API_URL}/user/animals`)
         .then((res) => {
           if (!res.ok) throw new Error("Algo salio mal");
           return res.json();

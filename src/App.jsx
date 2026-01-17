@@ -41,7 +41,7 @@ function App() {
           <Route path="password" element={<ChangePassword />} />
           <Route path="requests" element={<Requests />} />
           <Route path="requests/:id" element={<RequestDetails />} />
-          <Route path="requests/appointment" element={<AppointmentForm />} />
+          <Route path="requests/:id/appointment" element={<AppointmentForm />}/>
         </Route>
 
         {/* Redirección por defecto si no hay match */}
