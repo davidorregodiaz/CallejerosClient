@@ -35,12 +35,11 @@ export const AppointmentForm = () => {
       const combinedDateTime = new Date(`${form.date}T${form.time}:00`);
 
       const payload = {
-        adoptionRequestId: form.adoptionRequestId,
         date: combinedDateTime.toISOString(), // ← ENVÍAS EL DATETIME COMPLETO
         notes: form.notes,
         location: form.location,
       };
-      const res = await api(`${API_URL}/adoptions/appointment`, {
+      const res = await api(`${API_URL}/adoptions/${id}/appointments`, {
         method: "POST",
         credentials: "include",
         headers: {

@@ -1,6 +1,6 @@
 import { AppointmentCard } from "./AppointmentCard";
 
-export const Appointments = ({ appointments }) => {
+export const Appointments = ({ appointments, adoptionRequestId }) => {
   return (
     <div className="bg-white  rounded-xl shadow-sm ring-1 ring-slate-900/5">
       <div className="p-6">
@@ -9,7 +9,7 @@ export const Appointments = ({ appointments }) => {
         </h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           {appointments?.map((a) => (
-            <AppointmentCard key={a.appointmentId} appointment={a} />
+            <AppointmentCard key={a.appointmentId} appointment={a} adoptionRequestId={adoptionRequestId} />
           ))}
         </div>
       </div>

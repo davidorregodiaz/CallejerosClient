@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 export function HeroSection() {
   return (
     <div className="mt-5 @container">
@@ -19,10 +21,11 @@ export function HeroSection() {
               una vida para siempre.
             </h2>
           </div>
-          <button
+          <Link
+            to={"/adoptions"}
             className="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-10 px-4 @[480px]:h-12 @[480px]:px-5 bg-primary text-white text-sm font-bold leading-normal tracking-[0.015em] @[480px]:text-base @[480px]:font-bold @[480px]:leading-normal @[480px]:tracking-[0.015em]">
             <span className="truncate">Encuentra a tu amigo fiel</span>
-          </button>
+          </Link>
         </div>
       </div>
     </div>

@@ -40,7 +40,7 @@ export const RequesterRequestDetails = ({ adoption }) => {
               Citas Agendadas para esta Solicitud
             </h2>
             {adoption?.appointments?.map((a) => (
-              <RequesterAppointmentCard key={a.appointmentId} appointment={a} />
+              <RequesterAppointmentCard key={a.appointmentId} appointment={a} adoptionRequestId={adoption.adoptionRequestId} />
             ))}
           </div>
         </div>

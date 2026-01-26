@@ -2,7 +2,7 @@ import { useAuth } from "../features/auth/hooks/useAuth";
 import { Link } from "react-router-dom";
 
 export const UserLoggedIn = () => {
-  const { user, logout } = useAuth();
+  const { user, logout, userIsInRole } = useAuth();
 
   return (
     <div className="flex items-center gap-4">
@@ -49,28 +49,33 @@ export const UserLoggedIn = () => {
               </span>
               Mi Perfil
             </Link>
-            <a
+            {userIsInRole("Owner") ? (
+              <Link
+                className="flex items-center gap-3 rounded px-3 py-2 text-sm text-text-light dark:text-text-dark hover:bg-primary/20 hover:text-primary transition-colors"
+                to="/user/adoptions"
+                role="menuitem"
+                tabIndex="-1"
+              >
+                <span className="material-symbols-outlined text-base">
+                  favorite
+                </span>
+                Mis adopciones
+              </Link>
+            ) : (
+              ""
+            )}
+
+            <Link
               className="flex items-center gap-3 rounded px-3 py-2 text-sm text-text-light dark:text-text-dark hover:bg-primary/20 hover:text-primary transition-colors"
-              href="#"
-              role="menuitem"
-              tabIndex="-1"
-            >
-              <span className="material-symbols-outlined text-base">
-                favorite
-              </span>
-              Mis Favoritos
-            </a>
-            <a
-              className="flex items-center gap-3 rounded px-3 py-2 text-sm text-text-light dark:text-text-dark hover:bg-primary/20 hover:text-primary transition-colors"
-              href="#"
+              to="/user/requests"
               role="menuitem"
               tabIndex="-1"
             >
               <span className="material-symbols-outlined text-base">
                 description
               </span>
-              Mis Postulaciones
-            </a>
+              Solicitudes
+            </Link>
             <hr className="border-t border-border-light dark:border-border-dark my-1" />
             <button
               onClick={logout}

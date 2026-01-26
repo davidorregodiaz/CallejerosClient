@@ -24,7 +24,6 @@ export const UserAdoptions = () => {
     fetchAdoptions();
   }, []);
 
-  console.log(adoptions);
   return (
     <div className="font-display bg-white dark:bg-background-dark text-text-light dark:text-text-dark">
       <div className="relative flex h-auto min-h-screen w-full flex-col">

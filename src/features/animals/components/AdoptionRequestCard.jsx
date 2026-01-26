@@ -24,7 +24,7 @@ export const AdoptionRequestCard = ({ pet }) => {
         {pet.description}
       </p>
       <div className="flex justify-end gap-2 mt-2">
-        {pet.status === "adopted" ? (
+        {pet.status === "Completed" ? (
           <>
             <button className="px-3 py-1.5 rounded-md text-sm font-semibold border border-border-light dark:border-border-light hover:bg-gray-100 dark:hover:bg-gray-700">
               Editar

@@ -1,31 +1,44 @@
-import { useEffect, useState } from "react";
+import { useState, useEffect } from 'react';
+import { useApi } from "../../auth/hooks/useApi"; // Asumiendo que usas tu hook de API
 import { API_URL } from "../../../shared/commons/constants";
 
-export const useFetchAnimals = () => {
-  const [animals, setAnimals] = useState([]);
-  const [loading, setLoading] = useState(false);
+export function useFetchAnimals(filters) {
+  const [data, setData] = useState({ animals: [], totalCount: 0 });
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-
-  const fetchAnimals = async () => {
-    setLoading(true);
-    setError(null);
-    try {
-      const res = await fetch(`${API_URL}/animals`, { method: "GET" });
-      if (!res.ok) {
-        throw new Error("Error al obtener los animales");
-      }
-      const { data } = await res.json();
-      setAnimals(data);
-    } catch (err) {
-      setError(err);
-    } finally {
-      setLoading(false);
-    }
-  };
+  const api = useApi();
 
   useEffect(() => {
-    fetchAnimals();
-  },[]);
+    const fetchAnimals = async () => {
+      setLoading(true);
+      try {
 
-  return { animals, loading, error };
-};
+        const params = new URLSearchParams();
+        if (filters.species) params.append("Species", filters.species);
+        if (filters.breed) params.append("Breed", filters.breed);
+        if (filters.age) params.append("Age", filters.age);
+        if (filters.page) params.append("Page", filters.page);
+        if (filters.pageSize) params.append("PageSize", filters.pageSize);
+
+        const response = await api(`${API_URL}/animals?${params.toString()}`);
+        
+        if (!response.ok) throw new Error("Error al obtener animales");
+        
+        const result = await response.json();
+
+        setData({
+          animals: result.data || [],
+          totalCount: result.totalCount || 0
+        });
+      } catch (err) {
+        setError(err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchAnimals();
+  }, [filters]); // Se dispara cada vez que filters cambie
+
+  return { ...data, loading, error };
+}

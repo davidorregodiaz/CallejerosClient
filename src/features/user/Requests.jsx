@@ -6,7 +6,6 @@ import { RequesterRequestCard } from "./components/RequesterRequestCard";
 export const Requests = () => {
   const { userIsInRole } = useAuth();
   const { adoptions, loading, error } = useAdoptions();
-  console.log(adoptions);
 
   if (loading) return <p>Cargando...</p>;
 
