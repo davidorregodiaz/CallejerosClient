@@ -1,6 +1,6 @@
 // import styles from "./Spinner.module.css";
 
-export const Spinner = () => {
+const Spinner = () => {
   return (
     <div className="flex items-center justify-center min-h-screen bg-white">
       <div
@@ -13,3 +13,5 @@ export const Spinner = () => {
     </div>
   );
 };
+
+export default Spinner;

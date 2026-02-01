@@ -9,11 +9,11 @@ export const RequesterRequestCard = ({ adoption }) => {
         <img
           alt="Foto de Bruno"
           className="w-16 h-16 rounded-lg object-cover"
-          src={adoption.animalImage}
+          src={adoption.animal.principalImageUrl}
         />
         <div>
           <p className="font-bold text-lg text-slate-800">
-            {adoption.animalName}
+            {adoption.animal.name}
           </p>
           <p className="text-sm text-slate-500 ">Enviada el {date}</p>
         </div>

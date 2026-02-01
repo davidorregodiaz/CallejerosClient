@@ -12,12 +12,12 @@ export const RequestCard = ({ adoption }) => {
       <img
         alt="Foto del gato llamado Tom"
         className="h-24 w-24 rounded-md object-cover"
-        src={adoption?.animalImage}
+        src={adoption?.animal.principalImageUrl}
       />
       <div className="flex-1">
         <div className="flex justify-between items-center">
           <h3 className="text-lg font-bold text-slate-900">
-            Solicitud para adoptar a {adoption.animalName}
+            Solicitud para adoptar a {adoption.animal.name}
           </h3>
           <span className="text-xs font-medium text-slate-500 ">
             {timeAgo(adoption?.requestDate)}

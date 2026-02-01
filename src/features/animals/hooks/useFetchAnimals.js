@@ -21,9 +21,9 @@ export function useFetchAnimals(filters) {
         if (filters.pageSize) params.append("PageSize", filters.pageSize);
 
         const response = await api(`${API_URL}/animals?${params.toString()}`);
-        
+
         if (!response.ok) throw new Error("Error al obtener animales");
-        
+
         const result = await response.json();
 
         setData({
@@ -38,7 +38,12 @@ export function useFetchAnimals(filters) {
     };
 
     fetchAnimals();
-  }, [filters]); // Se dispara cada vez que filters cambie
+  }, [
+    filters.species,
+    filters.breed,
+    filters.age,
+    filters.page,
+    filters.pageSize]); // Se dispara cada vez que filters cambie
 
   return { ...data, loading, error };
 }

@@ -37,24 +37,24 @@ export function Navbar() {
           >
             Adoptar
           </Link>
-          <a
+          <Link
             className="text-sm font-medium leading-normal hover:text-primary"
-            href="#"
+            to={"/help"}
           >
             Cómo Ayudar
-          </a>
-          <a
+          </Link>
+          <Link
             className="text-sm font-medium leading-normal hover:text-primary"
-            href="#"
+            to={"/about"}
           >
             Nosotros
-          </a>
-          <a
+          </Link>
+          <Link
             className="text-sm font-medium leading-normal hover:text-primary"
-            href="#"
+            to={"/blog"}
           >
             Blog
-          </a>
+          </Link>
         </div>
 
         {token ? (

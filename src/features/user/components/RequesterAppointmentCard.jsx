@@ -3,14 +3,14 @@ import { formatDateTime } from "../../../shared/helpers";
 import { useApi } from "../../auth/hooks/useApi";
 import { RescheduleAppoinmentForm } from "./RescheduleAppointmentForm";
 import { useState } from "react";
-import { ErrorToast } from "../../../shared/ui/ErrorToast";
-import { SuccessToast } from "../../../shared/ui/SuccessToast";
-import { Spinner } from "../../../shared/ui/Spinner";
+import ErrorToast from "../../../shared/ui/ErrorToast";
+import SuccessToast from "../../../shared/ui/SuccessToast";
+import Spinner from "../../../shared/ui/Spinner";
 
 export const RequesterAppointmentCard = ({
   appointment,
   adoptionRequestId,
-  onUpdate 
+  onUpdate
 }) => {
   const [updateAppointmenModal, setUpdateAppointmentModal] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -29,7 +29,7 @@ export const RequesterAppointmentCard = ({
     try {
       setLoading(true);
       setError(null);
-      
+
       const res = await api(
         `${API_URL}/adoptions/${adoptionRequestId}/appointments/${appointment.appointmentId}/schedule`,
         {
@@ -48,7 +48,7 @@ export const RequesterAppointmentCard = ({
 
       // Si tienes un callback para actualizar la lista, llámalo después de un momento
       if (onUpdate) setTimeout(() => onUpdate(), 1500);
-      
+
     } catch (err) {
       console.error(err);
       setError({
@@ -63,15 +63,15 @@ export const RequesterAppointmentCard = ({
     <div className="relative group">
       {/* Feedback Visual: Toasts */}
       {error && (
-        <ErrorToast 
-          errorMessage={error.message} 
-          onClose={() => setError(null)} 
+        <ErrorToast
+          errorMessage={error.message}
+          onClose={() => setError(null)}
         />
       )}
       {success.title && (
-        <SuccessToast 
-          data={success} 
-          onClose={() => setSuccess({ title: "", message: "" })} 
+        <SuccessToast
+          data={success}
+          onClose={() => setSuccess({ title: "", message: "" })}
         />
       )}
 
@@ -112,11 +112,10 @@ export const RequesterAppointmentCard = ({
 
           <div className="shrink-0">
             <span
-              className={`inline-flex items-center rounded-full px-3 py-1 text-xs font-bold uppercase tracking-wider ${
-                isReschedule
-                  ? "bg-amber-100 text-amber-700"
-                  : "bg-blue-100 text-blue-700"
-              }`}
+              className={`inline-flex items-center rounded-full px-3 py-1 text-xs font-bold uppercase tracking-wider ${isReschedule
+                ? "bg-amber-100 text-amber-700"
+                : "bg-blue-100 text-blue-700"
+                }`}
             >
               <span
                 className={`w-2 h-2 mr-2 rounded-full ${isReschedule ? "bg-amber-500" : "bg-blue-500"}`}

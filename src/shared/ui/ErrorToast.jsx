@@ -1,13 +1,12 @@
 import { useState } from "react";
 
-export const ErrorToast = ({ errorMessage }) => {
+const ErrorToast = ({ errorMessage }) => {
   const [closeAnimation, setCloseAnimation] = useState(false);
 
   return (
     <div
-      className={`fixed z-1000 top-4 right-4 max-w-sm animate-fade-in-left ${
-        closeAnimation ? "animate-fade-out-left" : ""
-      }`}
+      className={`fixed z-1000 top-4 right-4 max-w-sm animate-fade-in-left ${closeAnimation ? "animate-fade-out-left" : ""
+        }`}
     >
       <div className="flex items-start gap-4 rounded-lg bg-[#fef2f2] p-4 shadow-lg ring-1 ring-[#fca5a5]/50">
         <div className="shrink-0">
@@ -35,3 +34,5 @@ export const ErrorToast = ({ errorMessage }) => {
     </div>
   );
 };
+
+export default ErrorToast;

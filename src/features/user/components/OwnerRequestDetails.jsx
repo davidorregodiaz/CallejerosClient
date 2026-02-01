@@ -26,9 +26,9 @@ export const OwnerRequestDetails = ({ adoption, id }) => {
         body: JSON.stringify({ status }),
       });
       if (!response.ok) throw new Error("Error al actualizar la solicitud");
-      
+
       // Aquí podrías llamar a una función para refrescar los datos si fuera necesario
-      window.location.reload(); 
+      window.location.reload();
     } catch (error) {
       setError(error);
     } finally {
@@ -89,7 +89,7 @@ export const OwnerRequestDetails = ({ adoption, id }) => {
           <img
             alt={`Foto de ${adoption?.animalName}`}
             className="w-full h-64 object-cover"
-            src={adoption?.animalImage}
+            src={adoption?.animal.principalImageUrl}
           />
           <div className="p-6">
             <p className="text-sm text-slate-500">Animal Solicitado</p>
@@ -151,16 +151,16 @@ export const OwnerRequestDetails = ({ adoption, id }) => {
                     Finalizar Adopción
                   </button>
                 )}
-                
+
                 {/* Opción de rechazar siempre disponible si no está aprobada o completada */}
                 {isPending && (
-                   <button
-                   onClick={() => updateAdoptionStatus("Rejected")}
-                   disabled={loading}
-                   className="w-full text-sm text-red-500 font-medium hover:underline py-2"
-                 >
-                   Rechazar Solicitud
-                 </button>
+                  <button
+                    onClick={() => updateAdoptionStatus("Rejected")}
+                    disabled={loading}
+                    className="w-full text-sm text-red-500 font-medium hover:underline py-2"
+                  >
+                    Rechazar Solicitud
+                  </button>
                 )}
               </>
             )}

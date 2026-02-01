@@ -1,6 +1,8 @@
 import { HeroSection } from "../shared/ui/HeroSection.jsx";
 import { AdoptionsSection } from "../features/animals/components/AdoptionSection.jsx";
 import { HowToAdoptSection } from "../shared/ui/HowToAdoptSection.jsx";
+import HowToHelp from "../shared/ui/HowToHelp.jsx";
+import Testimonials from "../shared/ui/Testimonials.jsx";
 
 export function Home() {
   const filters = {
@@ -17,15 +19,19 @@ export function Home() {
       <HeroSection />
 
       {/* 2. Sección de Adopciones (Título + Grilla) */}
+      {/*   
       <section className="container mx-auto px-4">
         <h2 className="text-2xl md:text-1xl font-bold leading-tight tracking-tight text-center mb-12">
           Conoce a tu futuro mejor amigo
         </h2>
         <AdoptionsSection filters={filters} />
-      </section>
+      </section>*/}
 
       {/* 3. Sección de Instrucciones */}
       <HowToAdoptSection />
+
+      <HowToHelp />
+      <Testimonials />
     </div>
   );
 }

@@ -2,18 +2,18 @@ import { useState } from "react";
 import { formatDateTime } from "../../../shared/helpers";
 import { useApi } from "../../auth/hooks/useApi";
 import { API_URL } from "../../../shared/commons/constants";
-import { Spinner } from "../../../shared/ui/Spinner";
-import { ErrorToast } from "../../../shared/ui/ErrorToast";
-import { SuccessToast } from "../../../shared/ui/SuccessToast";
+import Spinner from "../../../shared/ui/Spinner";
+import ErrorToast from "../../../shared/ui/ErrorToast";
+import SuccessToast from "../../../shared/ui/SuccessToast";
 import { RescheduleAppoinmentForm } from "./RescheduleAppointmentForm";
 
 export const AppointmentCard = ({ appointment, adoptionRequestId, onUpdate }) => {
   const api = useApi();
-  
+
   const isReschedule = appointment?.status === "RescheduleRequested";
   // Bloqueamos acciones si está cancelada o completada
   const isActionDisabled = appointment?.status === "Cancelled" || appointment?.status === "Rejected" || appointment?.status === "Completed";
-  
+
   const { date, time } = formatDateTime(isReschedule ? appointment?.dateProposed : appointment?.date);
 
   const [isOpen, setIsOpen] = useState(false);
@@ -77,12 +77,11 @@ export const AppointmentCard = ({ appointment, adoptionRequestId, onUpdate }) =>
       {error && <ErrorToast errorMessage={error.message} onClose={() => setError(null)} />}
       {success.title && <SuccessToast data={success} onClose={() => setSuccess({ title: "", message: "" })} />}
 
-      <div className={`flex mt-5 flex-col justify-between p-4 rounded-lg ring-1 transition-all duration-300 ${
-          isReschedule 
-            ? "bg-yellow-50 ring-yellow-200 border-l-4 border-l-yellow-400" 
-            : "bg-slate-50 ring-slate-200"
+      <div className={`flex mt-5 flex-col justify-between p-4 rounded-lg ring-1 transition-all duration-300 ${isReschedule
+          ? "bg-yellow-50 ring-yellow-200 border-l-4 border-l-yellow-400"
+          : "bg-slate-50 ring-slate-200"
         } ${loading ? "opacity-40 blur-[1px]" : "opacity-100"}`}>
-        
+
         <div>
           <div className="flex items-center gap-2 text-slate-900 font-bold">
             <span className={`material-symbols-outlined text-base ${isReschedule ? "text-yellow-700" : ""}`}>calendar_today</span>
@@ -112,8 +111,7 @@ export const AppointmentCard = ({ appointment, adoptionRequestId, onUpdate }) =>
         </div>
 
         <div className="mt-4 flex items-center justify-between">
-          <span className={`inline-flex items-center rounded-full px-3 py-1 text-sm font-medium ${
-              isReschedule ? "bg-yellow-200 text-yellow-900" : "bg-blue-100 text-blue-800"
+          <span className={`inline-flex items-center rounded-full px-3 py-1 text-sm font-medium ${isReschedule ? "bg-yellow-200 text-yellow-900" : "bg-blue-100 text-blue-800"
             }`}>
             {appointment?.status}
           </span>
@@ -124,13 +122,12 @@ export const AppointmentCard = ({ appointment, adoptionRequestId, onUpdate }) =>
               <button
                 onClick={() => setIsOpen(!isOpen)}
                 disabled={loading}
-                className={`flex items-center justify-center w-8 h-8 rounded-full transition-colors focus:outline-none disabled:cursor-not-allowed ${
-                  isReschedule ? "hover:bg-yellow-200 text-yellow-700" : "hover:bg-slate-200 text-slate-500"
-                }`}
+                className={`flex items-center justify-center w-8 h-8 rounded-full transition-colors focus:outline-none disabled:cursor-not-allowed ${isReschedule ? "hover:bg-yellow-200 text-yellow-700" : "hover:bg-slate-200 text-slate-500"
+                  }`}
               >
                 <span className="material-symbols-outlined">more_vert</span>
               </button>
-              
+
               <div
                 className={`absolute bottom-full right-0 mb-2 w-48 bg-white rounded-lg shadow-xl ring-1 ring-black ring-opacity-5 z-20 transition-all duration-200 
                 ${isOpen ? "opacity-100 translate-y-0 pointer-events-auto" : "opacity-0 translate-y-2 pointer-events-none"}`}
@@ -167,7 +164,7 @@ export const AppointmentCard = ({ appointment, adoptionRequestId, onUpdate }) =>
           )}
         </div>
       </div>
-      
+
       {loading && (
         <div className="absolute inset-0 z-30 flex items-center justify-center bg-white/10">
           <Spinner />

@@ -2,9 +2,9 @@ import { useParams } from "react-router-dom";
 import { useState } from "react";
 import { useApi } from "../../auth/hooks/useApi";
 import { API_URL } from "../../../shared/commons/constants";
-import { ErrorToast } from "../../../shared/ui/ErrorToast";
-import { Spinner } from "../../../shared/ui/Spinner";
-import { SuccessToast } from "../../../shared/ui/SuccessToast";
+import ErrorToast from "../../../shared/ui/ErrorToast";
+import Spinner from "../../../shared/ui/Spinner";
+import SuccessToast from "../../../shared/ui/SuccessToast";
 
 export const AppointmentForm = () => {
   const api = useApi();

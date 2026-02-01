@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useApi } from "../../auth/hooks/useApi";
 import { API_URL } from "../../../shared/commons/constants";
-import { ErrorToast } from "../../../shared/ui/ErrorToast";
+import ErrorToast from "../../../shared/ui/ErrorToast";
 
 export const AdoptionRequestFormModal = ({ onClose, animalName, animalId }) => {
   const api = useApi();
@@ -58,11 +58,10 @@ export const AdoptionRequestFormModal = ({ onClose, animalName, animalId }) => {
     }
   };
 
-  const buttonClass = `flex min-w-[84px] w-full cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 px-5 text-base font-bold leading-normal tracking-[0.015em] transition-colors ${
-    success
+  const buttonClass = `flex min-w-[84px] w-full cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 px-5 text-base font-bold leading-normal tracking-[0.015em] transition-colors ${success
       ? "bg-emerald-600 hover:bg-emerald-700"
       : "bg-primary hover:bg-primary/80"
-  } ${isLoading ? "opacity-80 cursor-wait" : ""}`;
+    } ${isLoading ? "opacity-80 cursor-wait" : ""}`;
 
   return (
     <>

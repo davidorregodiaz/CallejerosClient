@@ -1,13 +1,12 @@
 import { useState } from "react";
 
-export const SuccessToast = ({ data }) => {
+const SuccessToast = ({ data }) => {
   const [closeAnimation, setCloseAnimation] = useState(false);
 
   return (
     <div
-      className={`fixed z-1000 top-4 right-4 max-w-sm animate-fade-in-left ${
-        closeAnimation ? "animate-fade-out-left" : ""
-      }`}
+      className={`fixed z-1000 top-4 right-4 max-w-sm animate-fade-in-left ${closeAnimation ? "animate-fade-out-left" : ""
+        }`}
     >
       <div className="flex items-start gap-4 rounded-lg bg-white p-4 shadow-lg ring-1 ring-black ring-opacity-5 font-display">
         <div className="shrink-0">
@@ -38,3 +37,5 @@ export const SuccessToast = ({ data }) => {
     </div>
   );
 };
+
+export default SuccessToast;

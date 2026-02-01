@@ -16,6 +16,9 @@ import { Requests } from "./features/user/Requests.jsx";
 import { RequestDetails } from "./features/user/pages/RequestDetails.jsx";
 import { AppointmentForm } from "./features/user/pages/AppointmentForm.jsx";
 import { RescheduleAppoinmentForm } from "./features/user/components/RescheduleAppointmentForm.jsx";
+import About from "./shared/ui/About.jsx";
+import HowToHelpPage from "./shared/ui/HowToHelpPage.jsx";
+import Blog from "./shared/ui/Blog.jsx";
 
 function App() {
   return (
@@ -30,6 +33,9 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/animals/:id" element={<AnimalDetails />} />
           <Route path="/adoptions" element={<Adoptions />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/blog" element={<Blog />} />
+          <Route path="/help" element={<HowToHelpPage />} />
         </Route>
 
         <Route path="/user" element={<Profile />}>
@@ -41,7 +47,10 @@ function App() {
           <Route path="password" element={<ChangePassword />} />
           <Route path="requests" element={<Requests />} />
           <Route path="requests/:id" element={<RequestDetails />} />
-          <Route path="requests/:id/appointment" element={<AppointmentForm />}/>
+          <Route
+            path="requests/:id/appointment"
+            element={<AppointmentForm />}
+          />
         </Route>
 
         {/* Redirección por defecto si no hay match */}

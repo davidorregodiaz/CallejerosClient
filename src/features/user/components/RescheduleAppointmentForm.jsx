@@ -3,19 +3,19 @@ import { createPortal } from "react-dom";
 import { formatDateTime } from "../../../shared/helpers";
 import { useApi } from "../../auth/hooks/useApi";
 import { API_URL } from "../../../shared/commons/constants";
-import { ErrorToast } from "../../../shared/ui/ErrorToast";
-import { SuccessToast } from "../../../shared/ui/SuccessToast";
-import { Spinner } from "../../../shared/ui/Spinner";
+import ErrorToast from "../../../shared/ui/ErrorToast";
+import SuccessToast from "../../../shared/ui/SuccessToast";
+import Spinner from "../../../shared/ui/Spinner";
 
-export const RescheduleAppoinmentForm = ({ onClose = () => {}, dateTime, adoptionRequestId, appointmentId}) => {
+export const RescheduleAppoinmentForm = ({ onClose = () => { }, dateTime, adoptionRequestId, appointmentId }) => {
   const api = useApi();
   const { date, time } = formatDateTime(dateTime);
-  
+
   const [isClosing, setIsClosing] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState({ title: "", message: "" });
-  
+
   const [form, setForm] = useState({
     dateProposed: "",
     rescheduleMessage: "",
@@ -108,7 +108,7 @@ export const RescheduleAppoinmentForm = ({ onClose = () => {}, dateTime, adoptio
       {/* Modal content */}
       <div className={`relative z-20 flex h-full w-full items-center justify-center p-4 pointer-events-none ${isClosing ? "animate-fade-out-up" : "animate-fade-in-up"}`}>
         <div className="w-full max-w-2xl rounded-xl overflow-hidden bg-white shadow-2xl pointer-events-auto relative">
-          
+
           {/* Spinner Overlay local al modal */}
           {loading && (
             <div className="absolute inset-0 z-50 flex items-center justify-center bg-white/60 backdrop-blur-[1px]">

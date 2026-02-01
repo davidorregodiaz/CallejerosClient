@@ -8,6 +8,10 @@ export const useAdoptions = () => {
   const [error, setError] = useState(null);
   const api = useApi();
 
+  function getSomething(message) {
+    console.log(message);
+  }
+
   const fetchAdoptions = async () => {
     setLoading(true);
     setError(null);
