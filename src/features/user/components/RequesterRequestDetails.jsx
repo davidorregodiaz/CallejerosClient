@@ -10,11 +10,13 @@ function isAgeBiggerThanOne(age) {
 }
 
 export const RequesterRequestDetails = ({ adoption }) => {
+  const isRejected = adoption.status === "Rejected";
+
   return (
     <>
       <div className="space-y-8 relative">
         <div className="bg-white  rounded-xl shadow-sm ring-1 ring-slate-900/5 overflow-hidden">
-          <div className="md:flex">
+          <div className="md:flex max-h-[250px]">
 
             <div className="md:shrink-0">
               <img
@@ -50,12 +52,32 @@ export const RequesterRequestDetails = ({ adoption }) => {
             <h2 className="text-xl font-bold text-slate-900  mb-6">
               Citas Agendadas para esta Solicitud
             </h2>
-            {adoption.appointments.length === 0 && (<div class="flex items-center justify-center py-12 px-6 rounded-lg border border-dashed border-[#e7f3eb] dark:border-[#1e3a27] bg-background-light/50 dark:bg-background-dark/30">
-              <p class="text-[#4c9a66] dark:text-[#a1c2ac] text-sm font-medium">Aún no hay citas agendadas</p>
-            </div>)}
-            {adoption?.appointments?.map((a) => (
-              <RequesterAppointmentCard key={a.appointmentId} appointment={a} adoptionRequestId={adoption.adoptionRequestId} />
-            ))}
+
+            {isRejected ? (
+              <div className="flex items-center justify-center py-12 px-6 rounded-lg border border-dashed border-[#e7f3eb] dark:border-[#1e3a27] bg-background-light/50 dark:bg-background-dark/30">
+                <p className="text-red-500 text-sm font-medium">
+                  La solicitud fue rechazada
+                </p>
+              </div>
+            ) : (
+              <>
+                {adoption?.appointments?.length === 0 && (
+                  <div className="flex items-center justify-center py-12 px-6 rounded-lg border border-dashed border-[#e7f3eb] dark:border-[#1e3a27] bg-background-light/50 dark:bg-background-dark/30">
+                    <p className="text-[#4c9a66] dark:text-[#a1c2ac] text-sm font-medium">
+                      Aún no hay citas agendadas
+                    </p>
+                  </div>
+                )}
+
+                {adoption?.appointments?.map((a) => (
+                  <RequesterAppointmentCard
+                    key={a.appointmentId}
+                    appointment={a}
+                    adoptionRequestId={adoption.adoptionRequestId}
+                  />
+                ))}
+              </>
+            )}
           </div>
         </div>
       </div>

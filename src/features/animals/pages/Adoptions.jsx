@@ -4,7 +4,7 @@ import { AdoptionsSection } from "../components/AdoptionSection";
 export function Adoptions() {
   const [filters, setFilters] = useState({
     species: "",
-    breed: "",
+    localization: "",
     age: "",
   });
 
@@ -45,26 +45,26 @@ export function Adoptions() {
           </div>
           {/* Filtro Raza */}
           <div className="flex flex-col gap-1">
-            <label className="text-xs font-bold text-slate-700" htmlFor="raza">Raza</label>
+            <label className="text-xs font-bold text-slate-700" htmlFor="localization">Localizacion</label>
             <input
               className="w-full p-2 rounded-md border border-slate-200 bg-slate-50 text-sm focus:ring-2 focus:ring-blue-500 outline-none"
-              id="raza"
-              name="breed"
-              value={filters.breed}
-              placeholder="Ej: Mestizo"
+              id="localization"
+              name="localization"
+              value={filters.localization}
+              placeholder="Ej: Matanzas"
               type="text"
               onChange={handleChange}
             />
           </div>
           {/* Filtro Edad */}
           <div className="flex flex-col gap-1">
-            <label className="text-xs font-bold text-slate-700" htmlFor="age">Edad (años)</label>
+            <label className="text-xs font-bold text-slate-700" htmlFor="age">Edad (meses)</label>
             <input
               className="w-full p-2 rounded-md border border-slate-200 bg-slate-50 text-sm focus:ring-2 focus:ring-blue-500 outline-none"
               id="age"
               name="age"
               value={filters.age}
-              placeholder="Ej: 2"
+              placeholder="Ej: 24"
               type="number"
               min="0"
               onChange={handleChange}

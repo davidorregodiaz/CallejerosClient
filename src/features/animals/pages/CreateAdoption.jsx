@@ -12,7 +12,7 @@ export function CreateAdoption() {
     age: "",
     description: "",
     species: "",
-    breed: "",
+    localization: "",
     size: "",
     gender: "",
     compatibility: [], // array of strings
@@ -85,7 +85,7 @@ export function CreateAdoption() {
     const data = new FormData();
     data.append("Name", form.name);
     data.append("Age", Number(form.age || 0));
-    data.append("Breed", form.breed);
+    data.append("Breed", form.localization);
     data.append("Species", form.species);
     data.append("Description", form.description);
     data.append("Sex", form.gender);
@@ -162,13 +162,14 @@ export function CreateAdoption() {
               </label>
 
               <label className="flex flex-col">
-                <p className="text-base font-medium pb-2">Edad</p>
+                <p className="text-base font-medium pb-2">Edad en meses</p>
                 <input
                   name="age"
                   value={form.age}
                   onChange={handleChange}
                   className="flex w-full rounded-lg text-text-light dark:text-text-dark focus:outline-0 focus:ring-2 focus:ring-primary/50 border border-border-light bg-background-light dark:bg-background-dark h-12 p-3 text-base font-normal placeholder:text-gray-400"
-                  placeholder="Ej: 2 años"
+                  placeholder="Ej: 24"
+                  type="number"
                 />
               </label>
 
@@ -188,19 +189,13 @@ export function CreateAdoption() {
               </label>
 
               <label className="flex flex-col">
-                <p className="text-base font-medium pb-2">Raza</p>
-                <select
-                  name="breed"
+                <p className="text-base font-medium pb-2">Localization</p>
+                <input
+                  name="localization"
                   onChange={handleChange}
-                  value={form.breed}
+                  value={form.localization}
                   className="flex w-full rounded-lg text-text-light dark:text-text-dark focus:outline-0 focus:ring-2 focus:ring-primary/50 border border-border-light bg-background-light dark:bg-background-dark h-12 p-3 text-base font-normal"
-                >
-                  <option value="">Seleccionar raza</option>
-                  <option value="Mestizo">Mestizo</option>
-                  <option value="Labrador">Labrador</option>
-                  <option value="Pastor Alemán">Pastor Alemán</option>
-                  <option value="Golden Retriever">Golden Retriever</option>
-                </select>
+                />
               </label>
             </div>
           </div>

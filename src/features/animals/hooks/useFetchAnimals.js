@@ -15,7 +15,7 @@ export function useFetchAnimals(filters) {
 
         const params = new URLSearchParams();
         if (filters.species) params.append("Species", filters.species);
-        if (filters.breed) params.append("Breed", filters.breed);
+        if (filters.localization) params.append("Localization", filters.localization);
         if (filters.age) params.append("Age", filters.age);
         if (filters.page) params.append("Page", filters.page);
         if (filters.pageSize) params.append("PageSize", filters.pageSize);
@@ -40,7 +40,7 @@ export function useFetchAnimals(filters) {
     fetchAnimals();
   }, [
     filters.species,
-    filters.breed,
+    filters.localization,
     filters.age,
     filters.page,
     filters.pageSize]); // Se dispara cada vez que filters cambie

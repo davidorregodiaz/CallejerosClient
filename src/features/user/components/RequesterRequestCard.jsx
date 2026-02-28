@@ -1,8 +1,14 @@
 import { Link } from "react-router-dom";
 import { formatDateTime } from "../../../shared/helpers";
+import { PendingTag, ApprovedTag, RejectedTag, CompletedTag } from "../utils/adoptionStatusTags";
 
 export const RequesterRequestCard = ({ adoption }) => {
   const { date } = formatDateTime(adoption.requestDate);
+  const isPending = adoption.status === "Pending";
+  const isApproved = adoption.status === "Approved";
+  const isRejected = adoption.status === "Rejected";
+  const isCompleted = adoption.status === "Completed";
+
   return (
     <li className="flex items-center justify-between p-4 rounded-lg bg-slate-50  ring-1 ring-slate-900/5">
       <div className="flex items-center gap-4">
@@ -19,11 +25,12 @@ export const RequesterRequestCard = ({ adoption }) => {
         </div>
       </div>
       <div className="text-right">
-        <span className="inline-flex items-center rounded-full bg-blue-100  px-3 py-1 text-sm font-semibold text-blue-800 ">
-          {adoption.status}
-        </span>
+        {isPending && (<PendingTag />)}
+        {isApproved && (<ApprovedTag />)}
+        {isRejected && (<RejectedTag />)}
+        {isCompleted && (<CompletedTag />)}
         <Link
-          className="text-sm text-primary  hover:underline mt-1 block"
+          className="text-sm text-slate-700 hover:underline mt-1 block"
           to={`/user/requests/${adoption.adoptionRequestId}`}
         >
           Ver detalles

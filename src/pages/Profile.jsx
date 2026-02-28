@@ -27,7 +27,7 @@ export const Profile = () => {
                       backgroundImage: `url(${user?.imageUrl})`,
                     }}
                   ></div>
-                  <div className="flex flex-col">
+                  <div className="flex flex-col wrap-anywhere">
                     <h1 className="text-base font-medium leading-normal text-text-light dark:text-text-dark">
                       {user?.username}
                     </h1>

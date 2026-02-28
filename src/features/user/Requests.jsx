@@ -21,9 +21,9 @@ export const Requests = () => {
         <div className="space-y-4">
           {adoptions?.map((d) =>
             userIsInRole("Owner") ? (
-              <RequestCard key={d.id} adoption={d} />
+              <RequestCard key={d.adoptionRequestId} adoption={d} />
             ) : (
-              <RequesterRequestCard key={d.id} adoption={d} />
+              <RequesterRequestCard key={d.adoptionRequestId} adoption={d} />
             )
           )}
         </div>

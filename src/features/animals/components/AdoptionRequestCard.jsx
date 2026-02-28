@@ -1,7 +1,12 @@
 import { Link } from "react-router-dom";
+import { AdoptedTag, InAdoptionTag, InProcessTag } from "../../user/utils/animalStatusTags";
 
 export const AdoptionRequestCard = ({ pet }) => {
+  const isAdopted = pet.status === "Adopted";
+  const isInAdoption = pet.status === "Adoption";
+  const isInProcess = pet.status === "InProcess";
   console.log(pet);
+
   return (
     <div className="flex flex-col gap-4 border border-border-light dark:border-border-light rounded-lg p-4 bg-background-light dark:bg-background-dark">
       <div className="flex items-center gap-4">
@@ -15,9 +20,9 @@ export const AdoptionRequestCard = ({ pet }) => {
           <h4 className="text-lg font-bold text-text-light dark:text-text-dark">
             {pet.name}
           </h4>
-          <span className="text-sm font-medium px-2 py-1 rounded-full bg-primary/20 text-subtle-light dark:text-subtle-dark">
-            {pet?.status ?? "not specified"}
-          </span>
+          {isAdopted && (<AdoptedTag />)}
+          {isInAdoption && (<InAdoptionTag />)}
+          {isInProcess && (<InProcessTag />)}
         </div>
       </div>
       <p className="text-sm text-subtle-light dark:text-subtle-dark">

@@ -5,17 +5,20 @@ import { API_URL } from "../../../shared/commons/constants";
 import Spinner from "../../../shared/ui/Spinner";
 import ErrorToast from "../../../shared/ui/ErrorToast";
 import SuccessToast from "../../../shared/ui/SuccessToast";
+import { CompletedTag, PendingTag, RescheduleRequestedTag, ScheduleTag, CancelledTag } from "../utils/appointmentStatusTags";
 import { RescheduleAppoinmentForm } from "./RescheduleAppointmentForm";
 
 export const AppointmentCard = ({ appointment, adoptionRequestId, onUpdate }) => {
   const api = useApi();
-
   const isReschedule = appointment?.status === "RescheduleRequested";
-  // Bloqueamos acciones si está cancelada o completada
-  const isActionDisabled = appointment?.status === "Cancelled" || appointment?.status === "Rejected" || appointment?.status === "Completed";
-
+  const isScheduled = appointment?.status === "Scheduled";
+  const isCancelled = appointment?.status === "Cancelled";
+  const isCompleted = appointment?.status === "Completed";
+  const isPending = appointment?.status === "Pending";
+  const isActionDisabled = isCancelled || isCompleted;
+  const fadeIn = "opacity-100 translate-y-0 pointer-events-auto";
+  const fadeOut = "opacity-0 translate-y-2 pointer-events-none";
   const { date, time } = formatDateTime(isReschedule ? appointment?.dateProposed : appointment?.date);
-
   const [isOpen, setIsOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -78,8 +81,8 @@ export const AppointmentCard = ({ appointment, adoptionRequestId, onUpdate }) =>
       {success.title && <SuccessToast data={success} onClose={() => setSuccess({ title: "", message: "" })} />}
 
       <div className={`flex mt-5 flex-col justify-between p-4 rounded-lg ring-1 transition-all duration-300 ${isReschedule
-          ? "bg-yellow-50 ring-yellow-200 border-l-4 border-l-yellow-400"
-          : "bg-slate-50 ring-slate-200"
+        ? "bg-yellow-50 ring-yellow-200 border-l-4 border-l-yellow-400"
+        : "bg-slate-50 ring-slate-200"
         } ${loading ? "opacity-40 blur-[1px]" : "opacity-100"}`}>
 
         <div>
@@ -111,10 +114,12 @@ export const AppointmentCard = ({ appointment, adoptionRequestId, onUpdate }) =>
         </div>
 
         <div className="mt-4 flex items-center justify-between">
-          <span className={`inline-flex items-center rounded-full px-3 py-1 text-sm font-medium ${isReschedule ? "bg-yellow-200 text-yellow-900" : "bg-blue-100 text-blue-800"
-            }`}>
-            {appointment?.status}
-          </span>
+          {/* Tags de estado de la cita (appointment)*/}
+          {isScheduled && (<ScheduleTag />)}
+          {isReschedule && (<RescheduleRequestedTag />)}
+          {isPending && (<PendingTag />)}
+          {isCompleted && (<CompletedTag />)}
+          {isCancelled && (<CancelledTag />)}
 
           {/* Renderizado condicional del menú de acciones: No se muestra si está cancelada/completada */}
           {!isActionDisabled && (
@@ -130,34 +135,57 @@ export const AppointmentCard = ({ appointment, adoptionRequestId, onUpdate }) =>
 
               <div
                 className={`absolute bottom-full right-0 mb-2 w-48 bg-white rounded-lg shadow-xl ring-1 ring-black ring-opacity-5 z-20 transition-all duration-200 
-                ${isOpen ? "opacity-100 translate-y-0 pointer-events-auto" : "opacity-0 translate-y-2 pointer-events-none"}`}
+                ${isOpen ? fadeIn : fadeOut}`}
               >
                 <div className="py-1" role="menu">
-                  <button
-                    onClick={() => {
-                      setIsOpen(false);
-                      setShowRescheduleModal(true);
-                    }}
-                    className="flex w-full items-center px-4 py-2 text-sm text-slate-700 hover:bg-slate-100"
-                  >
-                    <span className="material-symbols-outlined text-sm mr-2">edit_calendar</span>
-                    Replanificar Cita
-                  </button>
-                  <button
-                    onClick={() => handleAction("schedule")}
-                    className="flex w-full items-center px-4 py-2 text-sm text-slate-700 hover:bg-slate-100"
-                  >
-                    <span className="material-symbols-outlined text-sm mr-2">event_available</span>
-                    Confirmar Fecha
-                  </button>
-                  <div className="border-t border-slate-100 my-1"></div>
-                  <button
-                    onClick={() => handleAction("cancel")}
-                    className="flex w-full items-center px-4 py-2 text-sm text-red-600 hover:bg-red-50"
-                  >
-                    <span className="material-symbols-outlined text-sm mr-2">cancel</span>
-                    Cancelar Cita
-                  </button>
+                  {isScheduled ? (
+                    <>
+                      <button
+                        onClick={() => handleAction("complete")}
+                        className="flex w-full items-center px-4 py-2 text-sm text-slate-700 hover:bg-slate-100"
+                      >
+                        <span className="material-symbols-outlined text-sm mr-2">check</span>
+                        Completar Cita
+                      </button>
+
+                      <div className="border-t border-slate-100 my-1"></div>
+                      <button
+                        onClick={() => handleAction("cancel")}
+                        className="flex w-full items-center px-4 py-2 text-sm text-red-600 hover:bg-red-50"
+                      >
+                        <span className="material-symbols-outlined text-sm mr-2">cancel</span>
+                        Cancelar Cita
+                      </button>
+                    </>
+                  ) : (
+                    <>
+                      <button
+                        onClick={() => {
+                          setIsOpen(false);
+                          setShowRescheduleModal(true);
+                        }}
+                        className="flex w-full items-center px-4 py-2 text-sm text-slate-700 hover:bg-slate-100"
+                      >
+                        <span className="material-symbols-outlined text-sm mr-2">edit_calendar</span>
+                        Replanificar Cita
+                      </button>
+                      <button
+                        onClick={() => handleAction("schedule")}
+                        className="flex w-full items-center px-4 py-2 text-sm text-slate-700 hover:bg-slate-100"
+                      >
+                        <span className="material-symbols-outlined text-sm mr-2">event_available</span>
+                        Confirmar Fecha
+                      </button>
+                      <div className="border-t border-slate-100 my-1"></div>
+                      <button
+                        onClick={() => handleAction("cancel")}
+                        className="flex w-full items-center px-4 py-2 text-sm text-red-600 hover:bg-red-50"
+                      >
+                        <span className="material-symbols-outlined text-sm mr-2">cancel</span>
+                        Cancelar Cita
+                      </button>
+                    </>
+                  )}
                 </div>
               </div>
             </div>

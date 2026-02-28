@@ -1,4 +1,3 @@
-// import { useNavigate } from "react-router-dom";
 import { useApi } from "../../auth/hooks/useApi";
 import { API_URL } from "../../../shared/commons/constants";
 import { useState } from "react";
@@ -25,6 +24,7 @@ export const OwnerRequestDetails = ({ adoption, id }) => {
         },
         body: JSON.stringify({ status }),
       });
+
       if (!response.ok) throw new Error("Error al actualizar la solicitud");
 
       // Aquí podrías llamar a una función para refrescar los datos si fuera necesario
@@ -50,14 +50,14 @@ export const OwnerRequestDetails = ({ adoption, id }) => {
                 <span className="material-symbols-outlined text-slate-500">person</span>
                 <div>
                   <p className="text-sm text-slate-500">Nombre Completo</p>
-                  <p className="font-semibold text-slate-700">{adoption?.requesterName}</p>
+                  <p className="font-semibold text-slate-700">{adoption?.requester.username}</p>
                 </div>
               </div>
               <div className="flex items-center gap-3">
                 <span className="material-symbols-outlined text-slate-500">email</span>
-                <div>
+                <div className="wrap-anywhere">
                   <p className="text-sm text-slate-500">Correo Electrónico</p>
-                  <p className="font-semibold text-slate-700">{adoption?.requesterEmail || "usuario@email.com"}</p>
+                  <p className="font-semibold text-slate-700">{adoption?.requester.email || "usuario@email.com"}</p>
                 </div>
               </div>
             </div>
@@ -124,14 +124,15 @@ export const OwnerRequestDetails = ({ adoption, id }) => {
             {/* 3. ESTADOS ACTIVOS (PENDING O APPROVED) */}
             {!isRejected && !isCompleted && (
               <>
-                <Link
-                  to={`/user/requests/${id}/appointment`}
-                  className="w-full flex items-center justify-center gap-2 rounded-lg bg-slate-800 text-white px-4 py-3 font-bold hover:bg-slate-700 transition-colors"
-                >
-                  <span className="material-symbols-outlined">calendar_month</span>
-                  {adoption?.appointments?.length > 0 ? "Re-agendar Cita" : "Agendar Cita"}
-                </Link>
-
+                {!isPending && (
+                  <Link
+                    to={`/user/requests/${id}/appointment`}
+                    className="w-full flex items-center justify-center gap-2 rounded-lg bg-slate-800 text-white px-4 py-3 font-bold hover:bg-slate-700 transition-colors"
+                  >
+                    <span className="material-symbols-outlined">calendar_month</span>
+                    Agendar Cita
+                  </Link>
+                )}
                 {isPending ? (
                   <button
                     onClick={() => updateAdoptionStatus("Approved")}

@@ -3,6 +3,7 @@ import { formatDateTime } from "../../../shared/helpers";
 import { useApi } from "../../auth/hooks/useApi";
 import { RescheduleAppoinmentForm } from "./RescheduleAppointmentForm";
 import { useState } from "react";
+import { ScheduleTag, PendingTag, CancelledTag, RescheduleRequestedTag, CompletedTag } from "../utils/appointmentStatusTags";
 import ErrorToast from "../../../shared/ui/ErrorToast";
 import SuccessToast from "../../../shared/ui/SuccessToast";
 import Spinner from "../../../shared/ui/Spinner";
@@ -16,6 +17,11 @@ export const RequesterAppointmentCard = ({
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState({ title: "", message: "" });
   const [error, setError] = useState(null);
+  const isScheduled = appointment.status === "Scheduled";
+  const isPending = appointment.status === "Pending";
+  const isCancelled = appointment.status === "Cancelled";
+  const isRescheduled = appointment.status === "RescheduledRequested";
+  const isCompleted = appointment.status === "Completed";
 
   const { date, time } = formatDateTime(appointment.date);
   const { date: dateProposed, time: timeProposed } = formatDateTime(
@@ -25,7 +31,7 @@ export const RequesterAppointmentCard = ({
 
   const isReschedule = appointment.status === "RescheduleRequested";
 
-  const acceptAppointment = async () => {
+  const scheduleAppointment = async () => {
     try {
       setLoading(true);
       setError(null);
@@ -111,17 +117,11 @@ export const RequesterAppointmentCard = ({
           </div>
 
           <div className="shrink-0">
-            <span
-              className={`inline-flex items-center rounded-full px-3 py-1 text-xs font-bold uppercase tracking-wider ${isReschedule
-                ? "bg-amber-100 text-amber-700"
-                : "bg-blue-100 text-blue-700"
-                }`}
-            >
-              <span
-                className={`w-2 h-2 mr-2 rounded-full ${isReschedule ? "bg-amber-500" : "bg-blue-500"}`}
-              ></span>
-              {appointment.status}
-            </span>
+            {isRescheduled && (<RescheduleRequestedTag />)}
+            {isScheduled && (<ScheduledTag />)}
+            {isPending && (<PendingTag />)}
+            {isCancelled && (<CancelledTag />)}
+            {isCompleted && (<CompletedTag />)}
           </div>
         </div>
 
@@ -168,7 +168,7 @@ export const RequesterAppointmentCard = ({
               Proponer otro cambio
             </button>
             <button
-              onClick={acceptAppointment}
+              onClick={scheduleAppointment}
               disabled={loading}
               className="w-full sm:w-auto flex items-center justify-center gap-2 rounded-lg bg-slate-900 text-white px-6 py-2 hover:bg-slate-800 font-bold transition-all text-sm shadow-sm active:scale-95 disabled:opacity-50"
             >
